@@ -49,7 +49,7 @@ namespace OpenLauncher.Core.Projects
                 ProjectDataJSON loadetObject = JsonConvert.DeserializeObject<ProjectDataJSON>(fileData);
                 Add(loadetObject);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return;
             }
@@ -86,7 +86,7 @@ namespace OpenLauncher.Core.Projects
             {
                 _projects = new ProjectList(loadetObject);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

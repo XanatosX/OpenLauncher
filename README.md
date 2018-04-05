@@ -10,7 +10,7 @@ The idea is to create a working launcher for any application you can imagine.
 
 If you want to contribute feel free to fork the project and create a pull request.
 
-# Download
+## Download
 
 There will be a download in the future, at the moment clone the source code and build it on your own. You will need the **.NET Framwork 4.6** and the **Newtonsoft.Json package** with the **version v11.0.2**.
 
@@ -18,7 +18,7 @@ You can find the Newtonsoft homepage [here][NewtonSoftJSON]
 
 **Please keep in mind this is an alpha state at the moment**
 
-# How to use
+## How to use
 
 You need to provide a **project.json** for importing into the launcher. This files contains all the data the launcher need to know. As Example
 
@@ -56,7 +56,7 @@ If you add your project.json to the launcher you should see a download button. T
 
 **Keep in mind to update your "Create server downloadable" everytime you update your project and upload this to your webserver!**
 
-# License
+## License
 
 This software is license under the [GNU General Public License 3][GNULicense]
 

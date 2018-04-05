@@ -14,6 +14,8 @@ If you want to contribute feel free to fork the project and create a pull reques
 
 There will be a download in the future, at the moment clone the source code and build it on your own. You will need the **.NET Framwork 4.6** and the **Newtonsoft.Json package** with the **version v11.0.2**.
 
+You can find the Newtonsoft homepage [here][NewtonSoftJSON]
+
 **Please keep in mind this is an alpha state at the moment**
 
 # How to use
@@ -59,5 +61,6 @@ If you add your project.json to the launcher you should see a download button. T
 This software is license under the [GNU General Public License 3][GNULicense]
 
 [GNULicense]: https://www.gnu.org/licenses/gpl-3.0.en.html
+[NewtonSoftJSON]: https://www.newtonsoft.com/json
 
 

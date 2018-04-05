@@ -92,8 +92,10 @@
             this.Controls.Add(this.B_ChooseFolder);
             this.Controls.Add(this.TB_MainProjectFolder);
             this.Controls.Add(this.L_ProjectFolder);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Settings";
             this.Text = "Settings";
+            this.Load += new System.EventHandler(this.Settings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

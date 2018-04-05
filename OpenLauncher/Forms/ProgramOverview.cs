@@ -20,6 +20,28 @@ namespace OpenLauncher.Forms
         public ProgramOverview()
         {
             InitializeComponent();
+
+            LV_Projects.ContextMenuStrip = CMS_projectManagment;
+
+            LV_Projects.AllowDrop = true;
+            LV_Projects.DragDrop += LV_Projects_DragDrop;
+            LV_Projects.DragEnter += LV_Projects_DragEnter;
+        }
+
+        private void LV_Projects_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void LV_Projects_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            foreach (string currentFile in files)
+            {
+                manager.Add(currentFile);
+            }
+            manager.Save();
+            loadProjects();
         }
 
         private void CreateNewProject_Click(object sender, EventArgs e)
@@ -102,6 +124,32 @@ namespace OpenLauncher.Forms
             Settings SettingForm = new Settings();
             SettingForm.StartPosition = FormStartPosition.CenterParent;
             SettingForm.ShowDialog();
+        }
+
+        private void CreateServerDownloadables_Click(object sender, EventArgs e)
+        {
+            CreateServerDownloadable serverDownloadableForm = new CreateServerDownloadable();
+            serverDownloadableForm.StartPosition = FormStartPosition.CenterParent;
+
+            serverDownloadableForm.ShowDialog();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (LV_Projects.SelectedItems.Count > 0)
+            {
+                ListViewItem item = LV_Projects.SelectedItems[0];
+                if (item.Tag.GetType() == typeof(ProjectDataJSON))
+                {
+                    ProjectDataJSON data = (ProjectDataJSON)item.Tag;
+                    manager.Remove(data.GUID);
+                    manager.Save();
+                    P_ProjectPanel.Controls.Clear();
+                }
+                    
+                
+                LV_Projects.SelectedItems[0].Remove();
+            }
         }
     }
 }

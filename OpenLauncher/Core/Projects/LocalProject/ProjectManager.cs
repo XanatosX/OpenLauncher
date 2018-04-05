@@ -57,7 +57,15 @@ namespace OpenLauncher.Core.Projects
 
         public void Add(ProjectDataJSON newData)
         {
+            string GUID = Guid.NewGuid().ToString();
+            newData.GUID = GUID;
+
             _projects.Add(newData);
+        }
+
+        public void Remove(string GUID)
+        {
+            _projects.Remove(GUID);
         }
 
         public bool Load()

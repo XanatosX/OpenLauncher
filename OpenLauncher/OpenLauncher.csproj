@@ -58,6 +58,7 @@
     <Compile Include="Core\Settings\DataModel\SettingsJSON.cs" />
     <Compile Include="Core\Settings\SettingsManager.cs" />
     <Compile Include="Core\Helper\StringDownloader.cs" />
+    <Compile Include="Core\Updater\CreateDownloadableManager.cs" />
     <Compile Include="Core\Updater\DataModel\UpdateableFile.cs" />
     <Compile Include="Core\Updater\DataModel\UpdaterConfigJSON.cs" />
     <Compile Include="Core\Projects\ProjectConfig\ProjectConfigManager.cs" />
@@ -65,6 +66,18 @@
     <Compile Include="Core\Updater\Controller\ProjectUpdateManager.cs" />
     <Compile Include="Core\Updater\Interfaces\UpdaterInterface.cs" />
     <Compile Include="Core\Template\WebsiteTemplate.cs" />
+    <Compile Include="Forms\CreateProjectConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CreateProjectConfig.Designer.cs">
+      <DependentUpon>CreateProjectConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CreateServerDownloadable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CreateServerDownloadable.Designer.cs">
+      <DependentUpon>CreateServerDownloadable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FromControls\ProjectControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -89,8 +102,20 @@
     <Compile Include="Forms\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TextEntryDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TextEntryDialog.Designer.cs">
+      <DependentUpon>TextEntryDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\CreateProjectConfig.resx">
+      <DependentUpon>CreateProjectConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CreateServerDownloadable.resx">
+      <DependentUpon>CreateServerDownloadable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FromControls\ProjectControl.resx">
       <DependentUpon>ProjectControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TextEntryDialog.resx">
+      <DependentUpon>TextEntryDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -20,6 +20,14 @@ namespace OpenLauncher.Core.Helper
 
         public string DownloadString()
         {
+            Uri testUri = null;
+            Uri.TryCreate(_fileToDownload, UriKind.Absolute, out testUri);
+
+            if (testUri == null)
+            {
+                return "";
+            }
+
             WebRequest request = WebRequest.Create(_fileToDownload);
             WebResponse response = null;
             try
@@ -36,8 +44,6 @@ namespace OpenLauncher.Core.Helper
             {
                 return reader.ReadToEnd();
             }
-
-            return "";
         }
 
         public byte[] DownloadBinary()

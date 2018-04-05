@@ -8,7 +8,22 @@ namespace OpenLauncher.Core.Updater.DataModel
 {
     public class UpdaterConfigJSON
     {
-        public string UpdaterDownloadPathBase { get; set; }
-        public List<UpdateableFile> Files { get; set; }
+        private List<UpdateableFile> _files;
+        public List<UpdateableFile> Files
+        { 
+            get
+            {
+                return _files;
+            }
+            set
+            {
+                _files = value;
+            }
+        }
+
+        public UpdaterConfigJSON()
+        {
+            _files = new List<UpdateableFile>();
+        }
     }
 }

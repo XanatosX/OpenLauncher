@@ -25,12 +25,8 @@ namespace OpenLauncher.Core.Updater
         private bool _readyForUpdate;
         public bool ReadyForUpdate => _readyForUpdate;
 
-        private List<string> _filesToUpdate;
-
         public ProjectUpdateManager(ProjectDataJSON projectData)
         {
-            _filesToUpdate = new List<string>();
-
             _data = projectData;
             _settingsManager = new SettingsManager();
 
@@ -63,6 +59,30 @@ namespace OpenLauncher.Core.Updater
             }
         }
 
+        public bool UpdateAvailable()
+        {
+            UpdaterConfigJSON serverConfig = getUpdaterConfigJSON();
+            if (serverConfig == null)
+            {
+                return false;
+            }
+            string baseFolder = _settings.MainProjectFolder + "\\" + _data.Name;
+            ChecksumCalculator ChecksumCreator = new ChecksumCalculator();
+            foreach (UpdateableFile currentServerFile in serverConfig.Files)
+            {
+                string localFile = baseFolder + "\\" + currentServerFile.Name;
+
+
+                string localChecksum = ChecksumCreator.GetChecksum(localFile);
+                if (localChecksum != currentServerFile.Checksum)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public void Update()
         {
             if (!_readyForUpdate)
@@ -71,33 +91,43 @@ namespace OpenLauncher.Core.Updater
                 return;
             }
 
+            UpdaterConfigJSON updaterConfig = getUpdaterConfigJSON();
+
+            if (updaterConfig == null)
+            {
+                return;
+            }
+
+            List<UpdateableFile> onlineFiles = updaterConfig.Files;
+            ChecksumCalculator ChecksumCreator = new ChecksumCalculator();
+            foreach (UpdateableFile currentServerFile in onlineFiles)
+            {
+                string currentFile = _settings.MainProjectFolder + "\\" + _data.Name + "\\" + currentServerFile.Name;
+                string localChecksum = ChecksumCreator.GetChecksum(currentFile);
+
+                if (localChecksum != currentServerFile.Checksum)
+                {
+                    DownloadFile(_data.HomeURL + "/" + _projectManager.LauncherSettings.DownloadMainFolder + "/" + currentServerFile.Name, currentServerFile.Name);
+                }
+            }
+        }
+
+        private UpdaterConfigJSON getUpdaterConfigJSON()
+        {
             FileDownloader downloader = new FileDownloader(_projectManager.UpdateInfo);
             string updateInfo = downloader.DownloadString();
 
             UpdaterConfigJSON updaterConfig = null;
-            
+
             try
             {
                 updaterConfig = JsonConvert.DeserializeObject<UpdaterConfigJSON>(updateInfo);
-                
-
             }
             catch (Exception)
             {
-                return;
+                return null;
             }
-            List<UpdateableFile> onlineFiles = updaterConfig.Files;
-            ChecksumCalculator ChecksumCreator = new ChecksumCalculator();
-            foreach (UpdateableFile currentOnlineFile in onlineFiles)
-            {
-                string currentFile = _settings.MainProjectFolder + "\\" + _data.Name + "\\" + currentOnlineFile.Name;
-                string localChecksum = ChecksumCreator.GetChecksum(currentFile);
-
-                if (localChecksum != currentOnlineFile.Checksum)
-                {
-                    DownloadFile(_data.HomeURL + "/" + _projectManager.LauncherSettings.DownloadMainFolder + "/" + currentOnlineFile.Name, currentOnlineFile.Name);
-                }
-            }
+            return updaterConfig;
         }
 
         private void DownloadFile(string URLPath, string fileName)
@@ -105,7 +135,15 @@ namespace OpenLauncher.Core.Updater
             FileDownloader downloader = new FileDownloader(URLPath);
             byte[] data = downloader.DownloadBinary();
 
-            FileStream output = File.Create(_settings.MainProjectFolder + "\\" + _data.Name + "\\" + fileName);
+            string file = _settings.MainProjectFolder + "\\" + _data.Name + "\\" + fileName;
+
+            FileInfo fi = new FileInfo(file);
+            if (!Directory.Exists(fi.DirectoryName))
+            {
+                Directory.CreateDirectory(fi.DirectoryName);
+            }
+
+            FileStream output = File.Create(file);
             using (BinaryWriter writer = new BinaryWriter(output))
             {
                 writer.Write(data);

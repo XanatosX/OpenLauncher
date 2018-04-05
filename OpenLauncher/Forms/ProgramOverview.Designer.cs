@@ -29,64 +29,99 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.MS_MainStrip = new System.Windows.Forms.MenuStrip();
             this.fORMFILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fORMCreateNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fORMLoadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reloadProjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.projectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadProjectsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.createNewProjectFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createServerDownloadablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoadProjectDialog = new System.Windows.Forms.OpenFileDialog();
             this.LV_Projects = new System.Windows.Forms.ListView();
             this.IL_ProjectImages = new System.Windows.Forms.ImageList(this.components);
             this.P_ProjectPanel = new System.Windows.Forms.Panel();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.CMS_projectManagment = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MS_MainStrip.SuspendLayout();
+            this.CMS_projectManagment.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // MS_MainStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fORMFILEToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.MS_MainStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fORMFILEToolStripMenuItem,
+            this.projectToolStripMenuItem});
+            this.MS_MainStrip.Location = new System.Drawing.Point(0, 0);
+            this.MS_MainStrip.Name = "MS_MainStrip";
+            this.MS_MainStrip.Size = new System.Drawing.Size(800, 24);
+            this.MS_MainStrip.TabIndex = 0;
+            this.MS_MainStrip.Text = "menuStrip1";
             // 
             // fORMFILEToolStripMenuItem
             // 
             this.fORMFILEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fORMCreateNewToolStripMenuItem,
-            this.fORMLoadProjectToolStripMenuItem,
-            this.reloadProjectsToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.fORMFILEToolStripMenuItem.Name = "fORMFILEToolStripMenuItem";
             this.fORMFILEToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fORMFILEToolStripMenuItem.Text = "File";
             // 
-            // fORMCreateNewToolStripMenuItem
+            // settingsToolStripMenuItem
             // 
-            this.fORMCreateNewToolStripMenuItem.Name = "fORMCreateNewToolStripMenuItem";
-            this.fORMCreateNewToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.fORMCreateNewToolStripMenuItem.Text = "Create new project";
-            this.fORMCreateNewToolStripMenuItem.Click += new System.EventHandler(this.CreateNewProject_Click);
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
-            // fORMLoadProjectToolStripMenuItem
+            // projectToolStripMenuItem
             // 
-            this.fORMLoadProjectToolStripMenuItem.Name = "fORMLoadProjectToolStripMenuItem";
-            this.fORMLoadProjectToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.fORMLoadProjectToolStripMenuItem.Text = "Load project";
-            this.fORMLoadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProject_Click);
+            this.projectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadProjectToolStripMenuItem,
+            this.reloadProjectsToolStripMenuItem1,
+            this.toolStripSeparator1,
+            this.createNewProjectFileToolStripMenuItem,
+            this.createServerDownloadablesToolStripMenuItem});
+            this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
+            this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.projectToolStripMenuItem.Text = "Project";
             // 
-            // reloadProjectsToolStripMenuItem
+            // loadProjectToolStripMenuItem
             // 
-            this.reloadProjectsToolStripMenuItem.Name = "reloadProjectsToolStripMenuItem";
-            this.reloadProjectsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.reloadProjectsToolStripMenuItem.Text = "Reload projects";
-            this.reloadProjectsToolStripMenuItem.Click += new System.EventHandler(this.reloadProjects_Click);
+            this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
+            this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.loadProjectToolStripMenuItem.Text = "Load project";
+            this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProject_Click);
+            // 
+            // reloadProjectsToolStripMenuItem1
+            // 
+            this.reloadProjectsToolStripMenuItem1.Name = "reloadProjectsToolStripMenuItem1";
+            this.reloadProjectsToolStripMenuItem1.Size = new System.Drawing.Size(225, 22);
+            this.reloadProjectsToolStripMenuItem1.Text = "Reload projects";
+            this.reloadProjectsToolStripMenuItem1.Click += new System.EventHandler(this.reloadProjects_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(222, 6);
+            // 
+            // createNewProjectFileToolStripMenuItem
+            // 
+            this.createNewProjectFileToolStripMenuItem.Name = "createNewProjectFileToolStripMenuItem";
+            this.createNewProjectFileToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.createNewProjectFileToolStripMenuItem.Text = "Create new project file";
+            this.createNewProjectFileToolStripMenuItem.Click += new System.EventHandler(this.CreateNewProject_Click);
+            // 
+            // createServerDownloadablesToolStripMenuItem
+            // 
+            this.createServerDownloadablesToolStripMenuItem.Name = "createServerDownloadablesToolStripMenuItem";
+            this.createServerDownloadablesToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.createServerDownloadablesToolStripMenuItem.Text = "Create server downloadables";
+            this.createServerDownloadablesToolStripMenuItem.Click += new System.EventHandler(this.CreateServerDownloadables_Click);
             // 
             // LoadProjectDialog
             // 
-            this.LoadProjectDialog.Filter = "\"Project-JSON|*.json\"";
+            this.LoadProjectDialog.Filter = "Project-JSON|*.json";
             // 
             // LV_Projects
             // 
@@ -110,12 +145,19 @@
             this.P_ProjectPanel.Size = new System.Drawing.Size(639, 411);
             this.P_ProjectPanel.TabIndex = 2;
             // 
-            // settingsToolStripMenuItem
+            // CMS_projectManagment
             // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            this.CMS_projectManagment.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.CMS_projectManagment.Name = "CMS_projectManagment";
+            this.CMS_projectManagment.Size = new System.Drawing.Size(108, 26);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // ProgramOverview
             // 
@@ -124,13 +166,15 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.P_ProjectPanel);
             this.Controls.Add(this.LV_Projects);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.MS_MainStrip);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MainMenuStrip = this.MS_MainStrip;
             this.Name = "ProgramOverview";
             this.Text = "Open launcher";
             this.Load += new System.EventHandler(this.ProgrammOverview_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.MS_MainStrip.ResumeLayout(false);
+            this.MS_MainStrip.PerformLayout();
+            this.CMS_projectManagment.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,15 +182,20 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip MS_MainStrip;
         private System.Windows.Forms.ToolStripMenuItem fORMFILEToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fORMCreateNewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fORMLoadProjectToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog LoadProjectDialog;
         private System.Windows.Forms.ListView LV_Projects;
         private System.Windows.Forms.ImageList IL_ProjectImages;
         private System.Windows.Forms.Panel P_ProjectPanel;
-        private System.Windows.Forms.ToolStripMenuItem reloadProjectsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem projectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reloadProjectsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem createNewProjectFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createServerDownloadablesToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip CMS_projectManagment;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

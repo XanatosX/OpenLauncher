@@ -12,6 +12,19 @@ namespace OpenLauncher.Core.Projects.DataModel
 {
     public class ProjectDataJSON
     {
+        private string _guid;
+        public string GUID
+        {
+            get
+            {
+                return _guid;
+            }
+            set
+            {
+                _guid = value;
+            }
+        }
+
         private string _imageURL;
         public string ImageUrl
         {

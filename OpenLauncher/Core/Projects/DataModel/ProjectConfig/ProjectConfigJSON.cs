@@ -20,5 +20,10 @@ namespace OpenLauncher.Core.Projects.DataModel
                 _launchables = value;
             }
         }
+
+        public ProjectConfigJSON()
+        {
+            _launchables = new List<LaunchableJSON>();
+        }
     }
 }

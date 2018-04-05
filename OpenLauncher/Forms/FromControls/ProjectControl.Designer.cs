@@ -32,6 +32,8 @@
             this.B_OpenSite = new System.Windows.Forms.Button();
             this.WB_ProjectMainPage = new System.Windows.Forms.WebBrowser();
             this.LV_Launchables = new System.Windows.Forms.ListView();
+            this.TH_starter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.B_OpenFolder = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // B_MainAction
@@ -64,18 +66,35 @@
             // 
             // LV_Launchables
             // 
+            this.LV_Launchables.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.TH_starter});
             this.LV_Launchables.Location = new System.Drawing.Point(359, 359);
             this.LV_Launchables.Name = "LV_Launchables";
             this.LV_Launchables.Size = new System.Drawing.Size(161, 49);
             this.LV_Launchables.TabIndex = 3;
             this.LV_Launchables.UseCompatibleStateImageBehavior = false;
-            this.LV_Launchables.View = System.Windows.Forms.View.List;
+            this.LV_Launchables.View = System.Windows.Forms.View.Details;
             this.LV_Launchables.SelectedIndexChanged += new System.EventHandler(this.LV_Launchables_SelectedIndexChanged);
+            // 
+            // TH_starter
+            // 
+            this.TH_starter.Text = "Starter";
+            // 
+            // B_OpenFolder
+            // 
+            this.B_OpenFolder.Location = new System.Drawing.Point(103, 359);
+            this.B_OpenFolder.Name = "B_OpenFolder";
+            this.B_OpenFolder.Size = new System.Drawing.Size(75, 52);
+            this.B_OpenFolder.TabIndex = 4;
+            this.B_OpenFolder.Text = "Open folder";
+            this.B_OpenFolder.UseVisualStyleBackColor = true;
+            this.B_OpenFolder.Click += new System.EventHandler(this.B_OpenFolder_Click);
             // 
             // ProjectControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.B_OpenFolder);
             this.Controls.Add(this.LV_Launchables);
             this.Controls.Add(this.WB_ProjectMainPage);
             this.Controls.Add(this.B_OpenSite);
@@ -93,5 +112,7 @@
         private System.Windows.Forms.Button B_OpenSite;
         private System.Windows.Forms.WebBrowser WB_ProjectMainPage;
         private System.Windows.Forms.ListView LV_Launchables;
+        private System.Windows.Forms.ColumnHeader TH_starter;
+        private System.Windows.Forms.Button B_OpenFolder;
     }
 }

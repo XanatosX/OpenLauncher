@@ -26,6 +26,18 @@ namespace OpenLauncher.Core.Projects.DataModel
             _dataJSON.Add(dataJSON);
         }
 
+        public void Remove(string GUID)
+        {
+            for (int i = 0; i < _dataJSON.Count; i++)
+            {
+                if (_dataJSON[i].GUID == GUID)
+                {
+                    _dataJSON.RemoveAt(i);
+                    return;
+                }
+            }
+        }
+
         public ProjectListJSON getSaveable()
         {
             return new ProjectListJSON()

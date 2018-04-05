@@ -84,7 +84,7 @@ namespace OpenLauncher.Core.Projects
             }
             foreach (ProjectDataJSON currentJSON in _projects.DataJson)
             {
-                currentJSON.DownloadImage();
+                currentJSON.CreateEnrichedContent();
             }
 
             return true;

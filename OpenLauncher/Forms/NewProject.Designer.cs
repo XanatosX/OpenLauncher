@@ -36,6 +36,8 @@
             this.TB_ProjectName = new System.Windows.Forms.TextBox();
             this.L_ProjectHome = new System.Windows.Forms.Label();
             this.TB_ProjectHomeURL = new System.Windows.Forms.TextBox();
+            this.CB_AddProject = new System.Windows.Forms.CheckBox();
+            this.B_Preview = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // B_Save
@@ -44,7 +46,7 @@
             this.B_Save.Name = "B_Save";
             this.B_Save.Size = new System.Drawing.Size(75, 23);
             this.B_Save.TabIndex = 0;
-            this.B_Save.Text = "B_Save";
+            this.B_Save.Text = "Save";
             this.B_Save.UseVisualStyleBackColor = true;
             this.B_Save.Click += new System.EventHandler(this.B_Save_Click);
             // 
@@ -64,18 +66,18 @@
             this.L_ProjectImageURL.AutoSize = true;
             this.L_ProjectImageURL.Location = new System.Drawing.Point(12, 35);
             this.L_ProjectImageURL.Name = "L_ProjectImageURL";
-            this.L_ProjectImageURL.Size = new System.Drawing.Size(103, 13);
+            this.L_ProjectImageURL.Size = new System.Drawing.Size(68, 13);
             this.L_ProjectImageURL.TabIndex = 2;
-            this.L_ProjectImageURL.Text = "L_ProjectImageURL";
+            this.L_ProjectImageURL.Text = "Project URL:";
             // 
             // L_ProjectName
             // 
             this.L_ProjectName.AutoSize = true;
             this.L_ProjectName.Location = new System.Drawing.Point(12, 9);
             this.L_ProjectName.Name = "L_ProjectName";
-            this.L_ProjectName.Size = new System.Drawing.Size(80, 13);
+            this.L_ProjectName.Size = new System.Drawing.Size(74, 13);
             this.L_ProjectName.TabIndex = 3;
-            this.L_ProjectName.Text = "L_ProjectName";
+            this.L_ProjectName.Text = "Project Name:";
             // 
             // TB_ProjectName
             // 
@@ -89,9 +91,9 @@
             this.L_ProjectHome.AutoSize = true;
             this.L_ProjectHome.Location = new System.Drawing.Point(12, 61);
             this.L_ProjectHome.Name = "L_ProjectHome";
-            this.L_ProjectHome.Size = new System.Drawing.Size(80, 13);
+            this.L_ProjectHome.Size = new System.Drawing.Size(74, 13);
             this.L_ProjectHome.TabIndex = 5;
-            this.L_ProjectHome.Text = "L_ProjectHome";
+            this.L_ProjectHome.Text = "Project Home:";
             // 
             // TB_ProjectHomeURL
             // 
@@ -100,11 +102,32 @@
             this.TB_ProjectHomeURL.Size = new System.Drawing.Size(569, 20);
             this.TB_ProjectHomeURL.TabIndex = 6;
             // 
+            // CB_AddProject
+            // 
+            this.CB_AddProject.AutoSize = true;
+            this.CB_AddProject.Location = new System.Drawing.Point(435, 88);
+            this.CB_AddProject.Name = "CB_AddProject";
+            this.CB_AddProject.Size = new System.Drawing.Size(163, 17);
+            this.CB_AddProject.TabIndex = 7;
+            this.CB_AddProject.Text = "Add the project after creating";
+            this.CB_AddProject.UseVisualStyleBackColor = true;
+            // 
+            // B_Preview
+            // 
+            this.B_Preview.Location = new System.Drawing.Point(121, 84);
+            this.B_Preview.Name = "B_Preview";
+            this.B_Preview.Size = new System.Drawing.Size(75, 23);
+            this.B_Preview.TabIndex = 8;
+            this.B_Preview.Text = "Preview";
+            this.B_Preview.UseVisualStyleBackColor = true;
+            // 
             // NewProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(691, 122);
+            this.ClientSize = new System.Drawing.Size(691, 113);
+            this.Controls.Add(this.B_Preview);
+            this.Controls.Add(this.CB_AddProject);
             this.Controls.Add(this.TB_ProjectHomeURL);
             this.Controls.Add(this.L_ProjectHome);
             this.Controls.Add(this.TB_ProjectName);
@@ -131,5 +154,7 @@
         private System.Windows.Forms.TextBox TB_ProjectName;
         private System.Windows.Forms.Label L_ProjectHome;
         private System.Windows.Forms.TextBox TB_ProjectHomeURL;
+        private System.Windows.Forms.CheckBox CB_AddProject;
+        private System.Windows.Forms.Button B_Preview;
     }
 }

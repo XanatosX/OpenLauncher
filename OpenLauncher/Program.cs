@@ -17,7 +17,7 @@ namespace OpenLauncher
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ProgrammOverview());
+            Application.Run(new ProgramOverview());
         }
     }
 }

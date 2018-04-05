@@ -52,29 +52,36 @@ namespace OpenLauncher.Core.Projects.DataModel
         }
 
         
-        private Bitmap displayImage;
+        private Bitmap _displayImage;
         [JsonIgnore]
-        public Bitmap DisplayImage
-        {
-            get
-            {
-                return displayImage;
-            }
-        }
+        public Bitmap DisplayImage => _displayImage;
+
+        [JsonIgnore]
+        private Uri _webURL;
+        public Uri WebURL => _webURL;
 
         public ProjectDataJSON()
         {
             
         }
 
-        public bool DownloadImage()
+        public void CreateEnrichedContent()
+        {
+            DownloadImage();
+            CreateURL();
+        }
+
+        public void DownloadImage()
         {
             WebRequest request = WebRequest.Create(ImageUrl);
             WebResponse response = request.GetResponse();
             Stream responseStream = response.GetResponseStream();
-            displayImage = new Bitmap(responseStream);
+            _displayImage = new Bitmap(responseStream);
+        }
 
-            return true;
+        public void CreateURL()
+        {
+            Uri.TryCreate(_homeURL, UriKind.Absolute, out _webURL);
         }
     }
 }

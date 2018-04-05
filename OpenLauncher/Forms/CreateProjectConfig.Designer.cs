@@ -35,17 +35,17 @@
             this.L_Executable = new System.Windows.Forms.Label();
             this.B_Done = new System.Windows.Forms.Button();
             this.CMS_ItemSelect = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.TSMI_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Rename = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.TSMI_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.CMS_ItemSelect.SuspendLayout();
             this.SuspendLayout();
             // 
             // LV_Executables
             // 
             this.LV_Executables.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.CH_DisplayName,
-            this.CH_Filepath});
+            this.CH_Filepath,
+            this.CH_DisplayName});
             this.LV_Executables.Location = new System.Drawing.Point(21, 25);
             this.LV_Executables.Name = "LV_Executables";
             this.LV_Executables.Size = new System.Drawing.Size(431, 126);
@@ -56,11 +56,13 @@
             // 
             // CH_DisplayName
             // 
+            this.CH_DisplayName.DisplayIndex = 0;
             this.CH_DisplayName.Text = "Displayname";
             this.CH_DisplayName.Width = 91;
             // 
             // CH_Filepath
             // 
+            this.CH_Filepath.DisplayIndex = 1;
             this.CH_Filepath.Text = "Filepath";
             this.CH_Filepath.Width = 331;
             // 
@@ -92,24 +94,24 @@
             this.CMS_ItemSelect.Name = "CMS_ItemSelect";
             this.CMS_ItemSelect.Size = new System.Drawing.Size(118, 54);
             // 
-            // TSMI_Delete
-            // 
-            this.TSMI_Delete.Name = "TSMI_Delete";
-            this.TSMI_Delete.Size = new System.Drawing.Size(180, 22);
-            this.TSMI_Delete.Text = "Delete";
-            this.TSMI_Delete.Click += new System.EventHandler(this.TSMI_Delete_Click);
-            // 
             // TSMI_Rename
             // 
             this.TSMI_Rename.Name = "TSMI_Rename";
-            this.TSMI_Rename.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_Rename.Size = new System.Drawing.Size(117, 22);
             this.TSMI_Rename.Text = "Rename";
             this.TSMI_Rename.Click += new System.EventHandler(this.TSMI_Rename_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(114, 6);
+            // 
+            // TSMI_Delete
+            // 
+            this.TSMI_Delete.Name = "TSMI_Delete";
+            this.TSMI_Delete.Size = new System.Drawing.Size(117, 22);
+            this.TSMI_Delete.Text = "Delete";
+            this.TSMI_Delete.Click += new System.EventHandler(this.TSMI_Delete_Click);
             // 
             // CreateProjectConfig
             // 

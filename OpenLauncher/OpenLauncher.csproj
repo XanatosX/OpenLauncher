@@ -48,13 +48,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Projects\DataModel\LaunchableJSON.cs" />
-    <Compile Include="Core\Projects\DataModel\ProjectConfigJSON.cs" />
-    <Compile Include="Core\Projects\DataModel\ProjectDataJSON.cs" />
-    <Compile Include="Core\Projects\DataModel\ProjectList.cs" />
-    <Compile Include="Core\Projects\DataModel\ProjectListJSON.cs" />
-    <Compile Include="Core\Projects\ProjectConfigManager.cs" />
-    <Compile Include="Core\Projects\ProjectManager.cs" />
+    <Compile Include="Core\Helper\ChecksumCalculator.cs" />
+    <Compile Include="Core\Projects\DataModel\ProjectConfig\LaunchableJSON.cs" />
+    <Compile Include="Core\Projects\DataModel\ProjectConfig\OpenLauncherSettingJSON.cs" />
+    <Compile Include="Core\Projects\DataModel\ProjectConfig\ProjectConfigJSON.cs" />
+    <Compile Include="Core\Projects\DataModel\LocalProject\ProjectDataJSON.cs" />
+    <Compile Include="Core\Projects\DataModel\LocalProject\ProjectList.cs" />
+    <Compile Include="Core\Projects\DataModel\LocalProject\ProjectListJSON.cs" />
+    <Compile Include="Core\Settings\DataModel\SettingsJSON.cs" />
+    <Compile Include="Core\Settings\SettingsManager.cs" />
+    <Compile Include="Core\Helper\StringDownloader.cs" />
+    <Compile Include="Core\Updater\DataModel\UpdateableFile.cs" />
+    <Compile Include="Core\Updater\DataModel\UpdaterConfigJSON.cs" />
+    <Compile Include="Core\Projects\ProjectConfig\ProjectConfigManager.cs" />
+    <Compile Include="Core\Projects\LocalProject\ProjectManager.cs" />
+    <Compile Include="Core\Updater\Controller\ProjectUpdateManager.cs" />
+    <Compile Include="Core\Updater\Interfaces\UpdaterInterface.cs" />
     <Compile Include="Core\Template\WebsiteTemplate.cs" />
     <Compile Include="Forms\FromControls\ProjectControl.cs">
       <SubType>UserControl</SubType>
@@ -74,6 +83,12 @@
     <Compile Include="Forms\ProgramOverview.Designer.cs">
       <DependentUpon>ProgramOverview.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FromControls\ProjectControl.resx">
@@ -84,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProgramOverview.resx">
       <DependentUpon>ProgramOverview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -109,8 +127,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\Language\" />
-    <Folder Include="Core\Settings\" />
     <Folder Include="LanguageFiles\" />
   </ItemGroup>
   <ItemGroup>

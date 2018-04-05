@@ -46,9 +46,9 @@
             // 
             // B_OpenSite
             // 
-            this.B_OpenSite.Location = new System.Drawing.Point(0, 388);
+            this.B_OpenSite.Location = new System.Drawing.Point(0, 359);
             this.B_OpenSite.Name = "B_OpenSite";
-            this.B_OpenSite.Size = new System.Drawing.Size(97, 23);
+            this.B_OpenSite.Size = new System.Drawing.Size(97, 52);
             this.B_OpenSite.TabIndex = 1;
             this.B_OpenSite.Text = "Open Website";
             this.B_OpenSite.UseVisualStyleBackColor = true;

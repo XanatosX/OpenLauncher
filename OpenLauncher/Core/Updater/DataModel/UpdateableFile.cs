@@ -9,7 +9,6 @@ namespace OpenLauncher.Core.Updater.DataModel
     public class UpdateableFile
     {
         public string Name { get; set; }
-        public string Version { get; set; }
         public string Checksum { get; set; }
     }
 }

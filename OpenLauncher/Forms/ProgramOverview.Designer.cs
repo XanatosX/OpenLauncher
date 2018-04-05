@@ -33,11 +33,12 @@
             this.fORMFILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fORMCreateNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fORMLoadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadProjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoadProjectDialog = new System.Windows.Forms.OpenFileDialog();
             this.LV_Projects = new System.Windows.Forms.ListView();
             this.IL_ProjectImages = new System.Windows.Forms.ImageList(this.components);
             this.P_ProjectPanel = new System.Windows.Forms.Panel();
-            this.reloadProjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +57,8 @@
             this.fORMFILEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fORMCreateNewToolStripMenuItem,
             this.fORMLoadProjectToolStripMenuItem,
-            this.reloadProjectsToolStripMenuItem});
+            this.reloadProjectsToolStripMenuItem,
+            this.settingsToolStripMenuItem});
             this.fORMFILEToolStripMenuItem.Name = "fORMFILEToolStripMenuItem";
             this.fORMFILEToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fORMFILEToolStripMenuItem.Text = "File";
@@ -64,16 +66,23 @@
             // fORMCreateNewToolStripMenuItem
             // 
             this.fORMCreateNewToolStripMenuItem.Name = "fORMCreateNewToolStripMenuItem";
-            this.fORMCreateNewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fORMCreateNewToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.fORMCreateNewToolStripMenuItem.Text = "Create new project";
             this.fORMCreateNewToolStripMenuItem.Click += new System.EventHandler(this.CreateNewProject_Click);
             // 
             // fORMLoadProjectToolStripMenuItem
             // 
             this.fORMLoadProjectToolStripMenuItem.Name = "fORMLoadProjectToolStripMenuItem";
-            this.fORMLoadProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fORMLoadProjectToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.fORMLoadProjectToolStripMenuItem.Text = "Load project";
             this.fORMLoadProjectToolStripMenuItem.Click += new System.EventHandler(this.LoadProject_Click);
+            // 
+            // reloadProjectsToolStripMenuItem
+            // 
+            this.reloadProjectsToolStripMenuItem.Name = "reloadProjectsToolStripMenuItem";
+            this.reloadProjectsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.reloadProjectsToolStripMenuItem.Text = "Reload projects";
+            this.reloadProjectsToolStripMenuItem.Click += new System.EventHandler(this.reloadProjects_Click);
             // 
             // LoadProjectDialog
             // 
@@ -101,12 +110,12 @@
             this.P_ProjectPanel.Size = new System.Drawing.Size(639, 411);
             this.P_ProjectPanel.TabIndex = 2;
             // 
-            // reloadProjectsToolStripMenuItem
+            // settingsToolStripMenuItem
             // 
-            this.reloadProjectsToolStripMenuItem.Name = "reloadProjectsToolStripMenuItem";
-            this.reloadProjectsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.reloadProjectsToolStripMenuItem.Text = "Reload projects";
-            this.reloadProjectsToolStripMenuItem.Click += new System.EventHandler(this.reloadProjects_Click);
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // ProgramOverview
             // 
@@ -118,7 +127,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ProgramOverview";
-            this.Text = "Project Overview";
+            this.Text = "Open launcher";
             this.Load += new System.EventHandler(this.ProgrammOverview_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -138,5 +147,6 @@
         private System.Windows.Forms.ImageList IL_ProjectImages;
         private System.Windows.Forms.Panel P_ProjectPanel;
         private System.Windows.Forms.ToolStripMenuItem reloadProjectsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }
 }

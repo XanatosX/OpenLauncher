@@ -96,5 +96,12 @@ namespace OpenLauncher.Forms
         {
             loadProjects();
         }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings SettingForm = new Settings();
+            SettingForm.StartPosition = FormStartPosition.CenterParent;
+            SettingForm.ShowDialog();
+        }
     }
 }

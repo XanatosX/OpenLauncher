@@ -12,12 +12,27 @@ using System.Diagnostics;
 using OpenLauncher.Core.Template;
 using OpenLauncher.Core.Projects;
 using System.IO;
+using OpenLauncher.Core.Updater;
+using OpenLauncher.Core.Settings;
+using OpenLauncher.Core.Settings.DataModel;
 
 namespace OpenLauncher.Forms.FromControls
 {
+
+    public enum ActionButtonMode
+    {
+        Download,
+        Update,
+        Launch
+    }
+
     public partial class ProjectControl : UserControl
     {
         private ProjectDataJSON _data;
+
+        private SettingsManager _settingsManager;
+        private SettingsJSON _settings;
+
         private string _projectFolder;
 
         private string _currentExecutable;
@@ -26,6 +41,13 @@ namespace OpenLauncher.Forms.FromControls
         {
             InitializeComponent();
             _data = data;
+            _settingsManager = new SettingsManager();
+            _settingsManager.Load();
+            _settings = _settingsManager.Settings;
+
+            _projectFolder = _settings.MainProjectFolder + "\\" + _data.Name;
+
+            
 
             WB_ProjectMainPage.ScriptErrorsSuppressed = true;
             LV_Launchables.MultiSelect = false;
@@ -46,14 +68,21 @@ namespace OpenLauncher.Forms.FromControls
             }
 
 
-            ProjectConfigManager projectConfigManager = new ProjectConfigManager(_data.HomeURL);
-            List<LaunchableJSON> launchables = projectConfigManager.getLaunchable();
-
-
+            ProjectConfigManager projectConfigManager = new ProjectConfigManager(_data);
+            List<LaunchableJSON> launchables = projectConfigManager.GetLaunchables();
 
             if (launchables.Count == 0)
             {
                 B_MainAction.Enabled = false;
+                if (projectConfigManager.Downloadable)
+                {
+                    B_MainAction.Enabled = true;
+                    B_MainAction.Text = "Download";
+                    B_MainAction.Tag = ActionButtonMode.Download;
+                    LV_Launchables.Visible = false;
+                    LV_Launchables.Enabled = false;
+                    return;
+                }
             }
 
             if (launchables.Count <= 1)
@@ -77,14 +106,36 @@ namespace OpenLauncher.Forms.FromControls
 
         private void B_MainAction_Click(object sender, EventArgs e)
         {
-
-            if (File.Exists(_currentExecutable))
+            ActionButtonMode currentMode = ActionButtonMode.Download;
+            if (sender.GetType() == typeof(Button))
             {
-                Process.Start(_currentExecutable);
+                Button currentButton = (Button)sender;
+                if (currentButton.Tag.GetType() == typeof(ActionButtonMode))
+                {
+                    currentMode = (ActionButtonMode)currentButton.Tag;
+                }
             }
-            else
-            {
 
+            switch (currentMode)
+            {
+                case ActionButtonMode.Download:
+                    DownloadProject();
+                    break;
+                case ActionButtonMode.Update:
+                    break;
+                case ActionButtonMode.Launch:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void DownloadProject()
+        {
+            ProjectUpdateManager updater = new ProjectUpdateManager(_data);
+            if (updater.ReadyForUpdate)
+            {
+                updater.Update();
             }
         }
 
@@ -110,10 +161,12 @@ namespace OpenLauncher.Forms.FromControls
             if (File.Exists(_currentExecutable))
             {
                 B_MainAction.Text = "Launch";
+                B_MainAction.Tag = ActionButtonMode.Launch;
             }
             else
             {
                 B_MainAction.Text = "Download";
+                B_MainAction.Tag = ActionButtonMode.Download;
             }
         }
     }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,10 @@ namespace OpenLauncher.Forms
 
         private void B_CreateAndOpen_Click(object sender, EventArgs e)
         {
+            if (Directory.Exists(TB_OutputFolder.Text))
+            {
+                Process.Start(TB_OutputFolder.Text);
+            }
             B_Create.PerformClick();
         }
 

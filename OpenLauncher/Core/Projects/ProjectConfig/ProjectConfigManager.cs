@@ -9,6 +9,11 @@ using System.IO;
 
 namespace OpenLauncher.Core.Projects
 {
+    /// <summary>
+    /// This class is a manager for all the project relevant data. It will generate all the needed path strings
+    /// It will check if the project is ready for download
+    /// It will check if you can launch the project locally
+    /// </summary>
     public class ProjectConfigManager
     {
         private string _baseURL;
@@ -38,7 +43,10 @@ namespace OpenLauncher.Core.Projects
         private bool _localLauncherFileAvailable;
         public bool LocalLauncherFileAvailable => _localLauncherFileAvailable;
 
-
+        /// <summary>
+        /// Create a new instance of this class for a project
+        /// </summary>
+        /// <param name="data">The project file to create an instance of</param>
         public ProjectConfigManager(ProjectDataJSON data)
         {
             _settingsManager = new SettingsManager();
@@ -60,8 +68,6 @@ namespace OpenLauncher.Core.Projects
                 return;
             }
 
-
-
             _serverProjectConfig = _baseURL + "/" + _launcherSettings.DownloadMainFolder +  "/ProjectConfig.json";   
             _updateInfo = _baseURL + "/" + _launcherSettings.DownloadMainFolder + "/UpdateInfo.json";
 
@@ -73,6 +79,10 @@ namespace OpenLauncher.Core.Projects
             }
         }
 
+        /// <summary>
+        /// Get all the launchable paths to show in the main window
+        /// </summary>
+        /// <returns>Returns a list with all the launchables of this project. This will be empty if there is no local file!</returns>
         public List<LaunchableJSON> GetLaunchables()
         {
             if (!_localLauncherFileAvailable)
@@ -99,6 +109,9 @@ namespace OpenLauncher.Core.Projects
             }
         }
 
+        /// <summary>
+        /// Get the basic information from the webserver where the main path can be found containing the project on the server.
+        /// </summary>
         private void getOpenLauncherInfo()
         {
             FileDownloader downloader = new FileDownloader(_openLauncherInfo);
@@ -113,6 +126,10 @@ namespace OpenLauncher.Core.Projects
             }
         }
 
+        /// <summary>
+        /// Check the project configuration on the webserver. This will check if the file is available and parsable
+        /// </summary>
+        /// <returns>Returns true if file is parsable and available</returns>
         private bool checkProjectConfig()
         {
             FileDownloader downloader = new FileDownloader(_serverProjectConfig);
@@ -129,6 +146,10 @@ namespace OpenLauncher.Core.Projects
             }
         }
 
+        /// <summary>
+        /// This will check if there is local configuration file, this will return true if the file is present and parsable
+        /// </summary>
+        /// <returns>True if the file is parsable and available</returns>
         private bool checkLocalConfig()
         {
             string localLauncherConfig = "";
@@ -152,6 +173,10 @@ namespace OpenLauncher.Core.Projects
             }
         }
 
+        /// <summary>
+        /// Checks if there is a update info file on the server which is parsable
+        /// </summary>
+        /// <returns>Returns true if the file is available and parsable</returns>
         private bool checkUpdateInfo()
         {
             FileDownloader downloader = new FileDownloader(_updateInfo);

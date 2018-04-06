@@ -26,6 +26,9 @@ namespace OpenLauncher.Forms.FromControls
         Launch
     }
 
+    /// <summary>
+    /// This is the control to show a project in the right window
+    /// </summary>
     public partial class ProjectControl : UserControl
     {
         private ProjectDataJSON _data;
@@ -73,6 +76,9 @@ namespace OpenLauncher.Forms.FromControls
             
         }
 
+        /// <summary>
+        /// This will initialize the project, this includes loading the launchable file and checking if there is an update available
+        /// </summary>
         private void init()
         {
             ProjectConfigManager projectConfigManager = new ProjectConfigManager(_data);
@@ -130,6 +136,11 @@ namespace OpenLauncher.Forms.FromControls
             LV_Launchables.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
+        /// <summary>
+        /// This is the event for the main button. This will trigger the update, download or launch of the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void B_MainAction_Click(object sender, EventArgs e)
         {
             ActionButtonMode currentMode = ActionButtonMode.Download;
@@ -158,6 +169,9 @@ namespace OpenLauncher.Forms.FromControls
             }
         }
 
+        /// <summary>
+        /// This function will start the download of the whole project. This function is used for the update as well.
+        /// </summary>
         private void DownloadProject()
         {
             B_MainAction.Enabled = false;
@@ -174,6 +188,11 @@ namespace OpenLauncher.Forms.FromControls
 
         }
 
+        /// <summary>
+        /// This function will be triggerd if the update is done. It will reset the project to the right, setting it up again
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Updater_DownloadComplete(object sender, EventArgs e)
         {
             PB_DownloadProgress.Value = PB_DownloadProgress.Maximum;
@@ -181,6 +200,11 @@ namespace OpenLauncher.Forms.FromControls
             init();
         }
 
+        /// <summary>
+        /// This function will be triggerd after a file has been downloaded, this will update the progress bar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Updater_DownloadProgressChanged(object sender, Core.Updater.DataModel.Events.StatusChangedData e)
         {
             PB_DownloadProgress.Visible = true;
@@ -191,6 +215,9 @@ namespace OpenLauncher.Forms.FromControls
             L_Progress.Text = $"{e.PercentDone}% downloaded";
         }
 
+        /// <summary>
+        /// This fuction will launch the current selected launchable
+        /// </summary>
         private void LaunchProject()
         {
 
@@ -205,11 +232,21 @@ namespace OpenLauncher.Forms.FromControls
             
         }
 
+        /// <summary>
+        /// This function will open the website of the current project
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void B_OpenSite_Click(object sender, EventArgs e)
         {
             Process.Start(_data.HomeURL);
         }
 
+        /// <summary>
+        /// This function will change the action button text and functionality after a new launchable is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LV_Launchables_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (LV_Launchables.SelectedItems.Count == 0)
@@ -239,20 +276,24 @@ namespace OpenLauncher.Forms.FromControls
             }
         }
 
+        /// <summary>
+        /// This function will check if there is an update available
+        /// </summary>
+        /// <returns></returns>
         private bool needUpdate()
         {
             ProjectUpdateManager updater = new ProjectUpdateManager(_data);
             return updater.UpdateAvailable();
         }
 
+        /// <summary>
+        /// This function will open up the project folder in windows.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void B_OpenFolder_Click(object sender, EventArgs e)
         {
             Process.Start(_settings.MainProjectFolder + "\\" + _data.Name + "\\");
-        }
-
-        private void ProjectControl_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

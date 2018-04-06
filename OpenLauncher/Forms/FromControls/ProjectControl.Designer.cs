@@ -121,7 +121,6 @@
             this.Controls.Add(this.B_MainAction);
             this.Name = "ProjectControl";
             this.Size = new System.Drawing.Size(639, 411);
-            this.Load += new System.EventHandler(this.ProjectControl_Load);
             this.ResumeLayout(false);
 
         }

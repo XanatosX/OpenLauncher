@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\GlobalEnums\ErrorEnum.cs" />
+    <Compile Include="Core\GlobalEvents\ErrorEvent.cs" />
     <Compile Include="Core\Helper\ChecksumCalculator.cs" />
     <Compile Include="Core\Projects\DataModel\ProjectConfig\LaunchableJSON.cs" />
     <Compile Include="Core\Projects\DataModel\ProjectConfig\OpenLauncherSettingJSON.cs" />

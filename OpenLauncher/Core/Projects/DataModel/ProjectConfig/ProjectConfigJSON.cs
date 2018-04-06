@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpenLauncher.Core.Projects.DataModel
 {
+    /// <summary>
+    /// A dataholder containing all the launchables for one project
+    /// </summary>
     public class ProjectConfigJSON
     {
         private List<LaunchableJSON> _launchables;
@@ -21,6 +24,9 @@ namespace OpenLauncher.Core.Projects.DataModel
             }
         }
 
+        /// <summary>
+        /// This function will create an empty instance of tis object
+        /// </summary>
         public ProjectConfigJSON()
         {
             _launchables = new List<LaunchableJSON>();

@@ -57,8 +57,8 @@ namespace OpenLauncher.Forms.FromControls
             init();
             if (_data.WebURL != null)
             {
-                WB_ProjectMainPage.Navigate(_data.WebURL);
-                //WB_ProjectMainPage.Url = _data.WebURL;
+                //@NOTE find a way to speed up the page loading. Maybe if the web browser is async
+                WB_ProjectMainPage.Url = _data.WebURL;
             }
             else
             {

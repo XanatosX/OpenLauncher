@@ -13,6 +13,9 @@ using System.IO;
 
 namespace OpenLauncher.Forms
 {
+    /// <summary>
+    /// This form will create a new project file, ready to use with the launcher
+    /// </summary>
     public partial class NewProject : Form
     {
         private bool _addProject;
@@ -21,7 +24,9 @@ namespace OpenLauncher.Forms
         private ProjectDataJSON _projectData;
         public ProjectDataJSON ProjectData => _projectData;
 
-
+        /// <summary>
+        /// This will create a new instance of this class
+        /// </summary>
         public NewProject()
         {
             InitializeComponent();
@@ -29,6 +34,11 @@ namespace OpenLauncher.Forms
             _projectData = null;
         }
 
+        /// <summary>
+        /// This will show up the save dialog and create the file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void B_Save_Click(object sender, EventArgs e)
         {
             _addProject = CB_AddProject.Checked;
@@ -51,11 +61,6 @@ namespace OpenLauncher.Forms
                 writer.Write(saveString);
             }
             this.Close();
-
-        }
-
-        private void NewProject_Load(object sender, EventArgs e)
-        {
 
         }
     }

@@ -14,13 +14,24 @@ using System.Windows.Forms;
 
 namespace OpenLauncher.Forms
 {
+    /// <summary>
+    /// This form will allow oyu to create a downloadable folder for the server 
+    /// </summary>
     public partial class CreateServerDownloadable : Form
     {
+        /// <summary>
+        /// This will create a new instance of the class
+        /// </summary>
         public CreateServerDownloadable()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// This button event will create a new downloadable and open up the folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void B_CreateAndOpen_Click(object sender, EventArgs e)
         {
             if (Directory.Exists(TB_OutputFolder.Text))
@@ -30,11 +41,21 @@ namespace OpenLauncher.Forms
             B_Create.PerformClick();
         }
 
+        /// <summary>
+        /// This button will close the form without any adjustments
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void B_Close_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// This will create the create the checksums and start coping the files
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void B_Create_Click(object sender, EventArgs e)
         {
             string inputFolder = TB_InputFolder.Text;
@@ -73,12 +94,22 @@ namespace OpenLauncher.Forms
             B_Close.PerformClick();
         }
 
+        /// <summary>
+        /// This will allow you to select an input folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void B_SelectInputFolder_Click(object sender, EventArgs e)
         {
             FBD_SelectFolder.ShowDialog();
             TB_InputFolder.Text = FBD_SelectFolder.SelectedPath;
         }
 
+        /// <summary>
+        /// This will allow you to select the output folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void B_SelectTargetFolder_Click(object sender, EventArgs e)
         {
             FBD_SelectFolder.ShowDialog();

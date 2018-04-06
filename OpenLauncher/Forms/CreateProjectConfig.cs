@@ -12,6 +12,9 @@ using System.Windows.Forms;
 
 namespace OpenLauncher.Forms
 {
+    /// <summary>
+    /// This form will allow you to create a ProjectConfiguration file for the server
+    /// </summary>
     public partial class CreateProjectConfig : Form
     {
         private string _baseFolder;
@@ -19,6 +22,10 @@ namespace OpenLauncher.Forms
         private ProjectConfigJSON _projectConfigJSON;
         public ProjectConfigJSON ProjectConfigJSON => _projectConfigJSON;
 
+        /// <summary>
+        /// This will create a new instance of this form
+        /// </summary>
+        /// <param name="baseFolder">This is the base folder (The input folder for creating the server files)</param>
         public CreateProjectConfig(string baseFolder)
         {
             InitializeComponent();
@@ -26,6 +33,11 @@ namespace OpenLauncher.Forms
             _baseFolder = baseFolder;
         }
 
+        /// <summary>
+        /// This function will setup the drag and drop functionality
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateProjectConfig_Load(object sender, EventArgs e)
         {
             LV_Executables.AllowDrop = true;
@@ -37,11 +49,21 @@ namespace OpenLauncher.Forms
             LV_Executables.MultiSelect = false;
         }
 
+        /// <summary>
+        /// This will handle the drag and drop effect shown on the mouse
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListView1_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Copy;
         }
 
+        /// <summary>
+        /// Handles the drag and drop event on the listview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListView1_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
@@ -61,6 +83,11 @@ namespace OpenLauncher.Forms
             LV_Executables.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
+        /// <summary>
+        /// This will show the right click menu if you click on one of the entries in the list view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LV_Executables_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -72,6 +99,11 @@ namespace OpenLauncher.Forms
             }
         }
 
+        /// <summary>
+        /// This is the rename button in the context menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TSMI_Rename_Click(object sender, EventArgs e)
         {
             if (LV_Executables.SelectedItems.Count == 0)
@@ -93,6 +125,11 @@ namespace OpenLauncher.Forms
            
         }
 
+        /// <summary>
+        /// This function will delete the currently selected entrie in the list view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TSMI_Delete_Click(object sender, EventArgs e)
         {
             if (LV_Executables.SelectedItems.Count > 0)
@@ -102,6 +139,11 @@ namespace OpenLauncher.Forms
             
         }
 
+        /// <summary>
+        /// This is the event for the done button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void B_Done_Click(object sender, EventArgs e)
         {
             _projectConfigJSON = new ProjectConfigJSON();

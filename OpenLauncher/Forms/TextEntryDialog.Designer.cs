@@ -82,7 +82,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "TextEntryDialog";
             this.Text = "TextEntryDialog";
-            this.Load += new System.EventHandler(this.TextEntryDialog_Load);
             this.Shown += new System.EventHandler(this.TextEntryDialog_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

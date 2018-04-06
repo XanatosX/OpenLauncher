@@ -13,10 +13,16 @@ using System.Windows.Forms;
 
 namespace OpenLauncher.Forms
 {
+    /// <summary>
+    /// This is the main window form of this application
+    /// </summary>
     public partial class ProgramOverview : Form
     {
         private ProjectManager manager;
 
+        /// <summary>
+        /// This will create a new instance of this class
+        /// </summary>
         public ProgramOverview()
         {
             InitializeComponent();
@@ -28,11 +34,21 @@ namespace OpenLauncher.Forms
             LV_Projects.DragEnter += LV_Projects_DragEnter;
         }
 
+        /// <summary>
+        /// This will set the mouse effect for the drag and drop functionality
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LV_Projects_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Copy;
         }
 
+        /// <summary>
+        /// This will perform the drop action and add the file to the projects if possible
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LV_Projects_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
@@ -44,6 +60,11 @@ namespace OpenLauncher.Forms
             loadProjects();
         }
 
+        /// <summary>
+        /// This is the function for the create new project button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateNewProject_Click(object sender, EventArgs e)
         {
             NewProject newProject = new NewProject();
@@ -58,6 +79,11 @@ namespace OpenLauncher.Forms
             }
         }
 
+        /// <summary>
+        /// This is the function to load an project file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadProject_Click(object sender, EventArgs e)
         {
             LoadProjectDialog.ShowDialog();
@@ -67,6 +93,11 @@ namespace OpenLauncher.Forms
             loadProjects();
         }
 
+        /// <summary>
+        /// This is the load function of this form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ProgrammOverview_Load(object sender, EventArgs e)
         {
             LV_Projects.Activation = ItemActivation.OneClick;
@@ -75,6 +106,9 @@ namespace OpenLauncher.Forms
             loadProjects();
         }
 
+        /// <summary>
+        /// This function will load all the availables projects and set the up in the form
+        /// </summary>
         private void loadProjects()
         {
             manager.Load();
@@ -92,7 +126,6 @@ namespace OpenLauncher.Forms
                     IL_ProjectImages.Images.Add(currentProject.DisplayImage);
                 }
                 
-
                 ListViewItem item = new ListViewItem(currentProject.Name);
                 item.Tag = currentProject;
                 item.ImageIndex = i;
@@ -101,6 +134,11 @@ namespace OpenLauncher.Forms
             }
         }
 
+        /// <summary>
+        /// This function will be triggered if you select a new project
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LV_Projects_ItemActivate(object sender, EventArgs e)
         {
             if (sender.GetType() == typeof(ListView))
@@ -118,11 +156,21 @@ namespace OpenLauncher.Forms
             }
         }
 
+        /// <summary>
+        /// This will reload all the projects
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void reloadProjects_Click(object sender, EventArgs e)
         {
             loadProjects();
         }
 
+        /// <summary>
+        /// This will show the settings form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Settings SettingForm = new Settings();
@@ -130,6 +178,11 @@ namespace OpenLauncher.Forms
             SettingForm.ShowDialog();
         }
 
+        /// <summary>
+        /// This will allow you to create a new server file folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateServerDownloadables_Click(object sender, EventArgs e)
         {
             CreateServerDownloadable serverDownloadableForm = new CreateServerDownloadable();
@@ -138,6 +191,11 @@ namespace OpenLauncher.Forms
             serverDownloadableForm.ShowDialog();
         }
 
+        /// <summary>
+        /// This will delete a project from the overview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (LV_Projects.SelectedItems.Count > 0)
@@ -151,7 +209,6 @@ namespace OpenLauncher.Forms
                     P_ProjectPanel.Controls.Clear();
                 }
                     
-                
                 LV_Projects.SelectedItems[0].Remove();
             }
         }

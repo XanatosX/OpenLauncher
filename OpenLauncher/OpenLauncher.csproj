@@ -58,7 +58,7 @@
     <Compile Include="Core\Settings\DataModel\SettingsJSON.cs" />
     <Compile Include="Core\Settings\SettingsManager.cs" />
     <Compile Include="Core\Helper\FileDownloader.cs" />
-    <Compile Include="Core\Updater\Controller\EventHandler.cs" />
+    <Compile Include="Core\Template\TemplateInterface.cs" />
     <Compile Include="Core\Updater\CreateDownloadableManager.cs" />
     <Compile Include="Core\Updater\DataModel\Events\StatusChangedData.cs" />
     <Compile Include="Core\Updater\DataModel\UpdateableFile.cs" />

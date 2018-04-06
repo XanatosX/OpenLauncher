@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using OpenLauncher.Core.GlobalEnums;
+using OpenLauncher.Core.GlobalEvents;
 using OpenLauncher.Core.Helper;
 using OpenLauncher.Core.Projects;
 using OpenLauncher.Core.Projects.DataModel;
@@ -16,6 +18,9 @@ using System.Threading.Tasks;
 
 namespace OpenLauncher.Core.Updater
 {
+    /// <summary>
+    /// This is the manager class for update the project
+    /// </summary>
     public class ProjectUpdateManager
     {
         private ProjectDataJSON _data;
@@ -33,9 +38,12 @@ namespace OpenLauncher.Core.Updater
 
         public event EventHandler<StatusChangedData> DownloadProgressChanged;
         public event EventHandler DownloadComplete;
-        public event EventHandler Error;
+        public event EventHandler<ErrorEvent> Error;
 
-
+        /// <summary>
+        /// This will create a a new updater for a project
+        /// </summary>
+        /// <param name="projectData">This is the dataset for the project to create an updater for</param>
         public ProjectUpdateManager(ProjectDataJSON projectData)
         {
             _data = projectData;
@@ -55,8 +63,9 @@ namespace OpenLauncher.Core.Updater
             setupProject();
         }
 
-
-
+        /// <summary>
+        /// This will setup all the needed project variables
+        /// </summary>
         private void setupProject()
         {
             DirectoryInfo projectDirectory = new DirectoryInfo(_settings.MainProjectFolder + "\\" + _data.Name);
@@ -69,7 +78,7 @@ namespace OpenLauncher.Core.Updater
                 }
                 catch (Exception)
                 {
-                    triggerErrorEvent("Missing rights to create a folder. Please check the user rights for " + projectDirectory.FullName);
+                    triggerErrorEvent(ErrorEnum.error ,"Missing rights to create a folder. Please check the user rights for " + projectDirectory.FullName);
                 }
             }
             else
@@ -78,6 +87,10 @@ namespace OpenLauncher.Core.Updater
             }
         }
 
+        /// <summary>
+        /// This functions checks if there is a local file differenting from the server files
+        /// </summary>
+        /// <returns>Returns true if one or more checksums are not identical with the server</returns>
         public bool UpdateAvailable()
         {
             UpdaterConfigJSON serverConfig = getUpdaterConfigJSON();
@@ -102,18 +115,34 @@ namespace OpenLauncher.Core.Updater
             return false;
         }
 
+        /// <summary>
+        /// This will update the project async
+        /// This will call the following events
+        /// DownloadProgressChanged => There was a new file downloaded
+        /// DownloadComplete  => All the files are successfully downloaded
+        /// </summary>
         public void UpdateAsync()
         {
             _asyncUpdateProvider.RunWorkerAsync();
         }
 
-
+        /// <summary>
+        /// This is the function to start the async update process
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void _asyncProvider_DoAsyncUpdate(object sender, DoWorkEventArgs e)
         {
             performUpdate(true);
             e.Result = "done";
         }
 
+        /// <summary>
+        /// This function will be called if there is a new file downloaded and the status changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">This contains a number of how many files are downloaded, 
+        /// how many files must be checked or downloaded and the last file successfully downloaded</param>
         private void _asyncUpdateProvider_UpdateStatusChanged(object sender, ProgressChangedEventArgs e)
         {
             int currentStatus = e.ProgressPercentage;
@@ -132,22 +161,34 @@ namespace OpenLauncher.Core.Updater
             _lastUpdateState = currentStatus;
         }
 
+        /// <summary>
+        /// This function will be called if the async update is done
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void _asyncUpdateProvider_UpdateCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             EventHandler handle = DownloadComplete;
             handle?.Invoke(this, null);
         }
 
+        /// <summary>
+        /// This will update the project
+        /// </summary>
         public void Update()
         {
             performUpdate();
         }
 
+        /// <summary>
+        /// This is the real function for the update process the public functions just refer to this one
+        /// </summary>
+        /// <param name="async">This can be set to true to send out event updates</param>
         private void performUpdate(bool async = false)
         {
             if (!_readyForUpdate)
             {
-                triggerErrorEvent("Not ready for update yet!");
+                triggerErrorEvent(ErrorEnum.warning, "Not ready for update yet!");
                 return;
             }
 
@@ -179,6 +220,10 @@ namespace OpenLauncher.Core.Updater
             }
         }
 
+        /// <summary>
+        /// This will download the file list from the server containing the filename and the checksum
+        /// </summary>
+        /// <returns>Returns the server instance of the update list</returns>
         private UpdaterConfigJSON getUpdaterConfigJSON()
         {
             FileDownloader downloader = new FileDownloader(_projectManager.UpdateInfo);
@@ -197,6 +242,11 @@ namespace OpenLauncher.Core.Updater
             return updaterConfig;
         }
 
+        /// <summary>
+        /// This function will download a file as binary and save it to the project folder
+        /// </summary>
+        /// <param name="URLPath">The path to the server file</param>
+        /// <param name="fileName">The filenam on the server</param>
         private void DownloadFile(string URLPath, string fileName)
         {
             FileDownloader downloader = new FileDownloader(URLPath);
@@ -217,9 +267,15 @@ namespace OpenLauncher.Core.Updater
             }
         }
 
-        private void triggerErrorEvent(string errorMessage)
+        /// <summary>
+        /// This function will trigger an error event
+        /// </summary>
+        /// <param name="errorMessage"></param>
+        private void triggerErrorEvent(ErrorEnum errorLevel, string errorMessage)
         {
-
+            EventHandler<ErrorEvent> handler = Error;
+            ErrorEvent errorEvent = new ErrorEvent(errorLevel, errorMessage);
+            handler?.Invoke(this, null);
         }
     }
 }

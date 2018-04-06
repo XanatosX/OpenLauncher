@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpenLauncher.Core.Settings.DataModel
 {
+    /// <summary>
+    /// This class represents a parsable object for the settings json file
+    /// </summary>
     public class SettingsJSON
     {
         private string _mainProjectFolder;

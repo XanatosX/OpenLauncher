@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace OpenLauncher.Core.Projects.DataModel
 {
+    /// <summary>
+    /// This is a data model for the project data. This is what is getting shown to the left in the main window
+    /// </summary>
     public class ProjectDataJSON
     {
         private string _guid;
@@ -76,12 +79,18 @@ namespace OpenLauncher.Core.Projects.DataModel
         [JsonIgnore]
         public Uri WebURL => _webURL;
 
+        /// <summary>
+        /// This will create the enriched content. Filling up the WebURL and the DisplayImage
+        /// </summary>
         public void CreateEnrichedContent()
         {
             DownloadImage();
             CreateURL();
         }
 
+        /// <summary>
+        /// This will download the image from the path entered in den ImageURL
+        /// </summary>
         public void DownloadImage()
         {
             WebRequest request = WebRequest.Create(ImageUrl);
@@ -99,6 +108,9 @@ namespace OpenLauncher.Core.Projects.DataModel
             _displayImage = new Bitmap(responseStream);
         }
 
+        /// <summary>
+        /// This will check the _homeURL and will create a Uri out of it
+        /// </summary>
         public void CreateURL()
         {
             Uri.TryCreate(_homeURL, UriKind.Absolute, out _webURL);

@@ -66,17 +66,15 @@ namespace OpenLauncher.Core.Projects.DataModel
 
         
         private Bitmap _displayImage;
+
         [JsonIgnore]
         public Bitmap DisplayImage => _displayImage;
 
-        [JsonIgnore]
+        
         private Uri _webURL;
-        public Uri WebURL => _webURL;
 
-        public ProjectDataJSON()
-        {
-            
-        }
+        [JsonIgnore]
+        public Uri WebURL => _webURL;
 
         public void CreateEnrichedContent()
         {

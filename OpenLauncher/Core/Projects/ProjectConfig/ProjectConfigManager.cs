@@ -6,10 +6,6 @@ using OpenLauncher.Core.Settings.DataModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenLauncher.Core.Projects
 {
@@ -28,13 +24,19 @@ namespace OpenLauncher.Core.Projects
         private string _openLauncherInfo;
         public string OpenLauncherInfo => _openLauncherInfo;
 
-        private string _projectConfig;
-        public string ProjectConfig => _projectConfig;
+        private string _localProjectConfig;
+        public string LocalProjectConfig => _localProjectConfig;
+
+        private string _serverProjectConfig;
+        public string ServerProjectConfig => _serverProjectConfig;
         private string _updateInfo;
         public string UpdateInfo => _updateInfo;
 
         private bool _downloadable;
         public bool Downloadable => _downloadable;
+
+        private bool _localLauncherFileAvailable;
+        public bool LocalLauncherFileAvailable => _localLauncherFileAvailable;
 
 
         public ProjectConfigManager(ProjectDataJSON data)
@@ -51,13 +53,17 @@ namespace OpenLauncher.Core.Projects
             _openLauncherInfo = _baseURL + "/OpenLauncher.json";
             getOpenLauncherInfo();
 
+            _localProjectConfig = _settings.MainProjectFolder + "\\" + _data.Name + "\\ProjectConfig.json";
+            _localLauncherFileAvailable = checkLocalConfig();
             if (_launcherSettings == null)
             {
+
                 return;
             }
 
 
-            _projectConfig = _baseURL + "/" + _launcherSettings.DownloadMainFolder +  "/ProjectConfig.json";   
+
+            _serverProjectConfig = _baseURL + "/" + _launcherSettings.DownloadMainFolder +  "/ProjectConfig.json";   
             _updateInfo = _baseURL + "/" + _launcherSettings.DownloadMainFolder + "/UpdateInfo.json";
 
 
@@ -70,7 +76,7 @@ namespace OpenLauncher.Core.Projects
 
         public List<LaunchableJSON> GetLaunchables()
         {
-            if (_launcherSettings == null)
+            if (!_localLauncherFileAvailable)
             {
                 return new List<LaunchableJSON>();
             }
@@ -110,12 +116,31 @@ namespace OpenLauncher.Core.Projects
 
         private bool checkProjectConfig()
         {
-            FileDownloader downloader = new FileDownloader(_projectConfig);
+            FileDownloader downloader = new FileDownloader(_serverProjectConfig);
             string projectConfig = downloader.DownloadString();
 
             try
             {
                 JsonConvert.DeserializeObject<ProjectConfigJSON>(projectConfig);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private bool checkLocalConfig()
+        {
+            string localLauncherConfig = "";
+            using (StreamReader reader = new StreamReader(_localProjectConfig))
+            {
+                localLauncherConfig = reader.ReadToEnd();
+            }
+
+            try
+            {
+                JsonConvert.DeserializeObject<ProjectConfigJSON>(localLauncherConfig);
                 return true;
             }
             catch (Exception)

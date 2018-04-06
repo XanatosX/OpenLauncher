@@ -8,7 +8,10 @@ using System.Windows.Forms;
 
 namespace OpenLauncher.Core.Template
 {
-    public class WebsiteTemplate
+    /// <summary>
+    /// This is a class for
+    /// </summary>
+    public class WebsiteTemplate : TemplateInterface
     {
         private string _templateFolder;
         private string _templateFile;

@@ -62,7 +62,7 @@ namespace OpenLauncher.Forms.FromControls
             }
             else
             {
-                WebsiteTemplate templateEngine = new WebsiteTemplate();
+                TemplateInterface templateEngine = new WebsiteTemplate();
                 templateEngine.SetTemplateFile("ProjectBasic.html");
                 templateEngine.AddReplacement("projectname", data.Name);
                 templateEngine.AddReplacement("imgsource", data.ImageUrl);

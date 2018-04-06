@@ -85,7 +85,16 @@ namespace OpenLauncher.Core.Projects.DataModel
         public void DownloadImage()
         {
             WebRequest request = WebRequest.Create(ImageUrl);
-            WebResponse response = request.GetResponse();
+            WebResponse response = null;
+            try
+            {
+                response = request.GetResponse();
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
             Stream responseStream = response.GetResponseStream();
             _displayImage = new Bitmap(responseStream);
         }

@@ -87,7 +87,11 @@ namespace OpenLauncher.Forms
             for (int i = 0; i < manager.Projects.Count; i++)
             {
                 ProjectDataJSON currentProject = manager.Projects[i];
-                IL_ProjectImages.Images.Add(currentProject.DisplayImage);
+                if (currentProject.DisplayImage != null)
+                {
+                    IL_ProjectImages.Images.Add(currentProject.DisplayImage);
+                }
+                
 
                 ListViewItem item = new ListViewItem(currentProject.Name);
                 item.Tag = currentProject;

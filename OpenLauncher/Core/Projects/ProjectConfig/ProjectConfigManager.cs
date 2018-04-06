@@ -57,7 +57,6 @@ namespace OpenLauncher.Core.Projects
             _localLauncherFileAvailable = checkLocalConfig();
             if (_launcherSettings == null)
             {
-
                 return;
             }
 
@@ -133,6 +132,10 @@ namespace OpenLauncher.Core.Projects
         private bool checkLocalConfig()
         {
             string localLauncherConfig = "";
+            if (!File.Exists(_localProjectConfig))
+            {
+                return false;
+            }
             using (StreamReader reader = new StreamReader(_localProjectConfig))
             {
                 localLauncherConfig = reader.ReadToEnd();

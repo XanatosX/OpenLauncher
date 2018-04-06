@@ -18,6 +18,9 @@ namespace OpenLauncher.Core.Template
 
         private Dictionary<string, string> _replaceDict;
 
+        /// <summary>
+        /// This will create a new empty instance of the class
+        /// </summary>
         public WebsiteTemplate()
         {
             _replaceDict = new Dictionary<string, string>();
@@ -25,9 +28,10 @@ namespace OpenLauncher.Core.Template
             FileInfo appInfo = new FileInfo(Application.ExecutablePath);
 
             _templateFolder = appInfo.DirectoryName + "\\Templates\\Websites";
-            
+
         }
 
+        /// <inheritdoc />
         public void SetTemplateFile(string filename)
         {
             string newTemplate = _templateFolder + "\\";
@@ -38,11 +42,13 @@ namespace OpenLauncher.Core.Template
             }
         }
 
+        /// <inheritdoc />
         public void AddReplacement(string needle, string replacement)
         {
             _replaceDict.Add(needle, replacement);
         }
 
+        /// <inheritdoc />
         public string Get()
         {
             if (!File.Exists(_templateFile))
@@ -56,6 +62,10 @@ namespace OpenLauncher.Core.Template
             return finalTemplate;
         }
 
+        /// <summary>
+        /// This will load the template from the HDD
+        /// </summary>
+        /// <returns>Returns the content as string</returns>
         private string load()
         {
             string template;
@@ -67,6 +77,11 @@ namespace OpenLauncher.Core.Template
             return template;
         }
 
+        /// <summary>
+        /// This will replace a needle in the string
+        /// </summary>
+        /// <param name="baseTemplate"></param>
+        /// <returns>Returns the template with the changed values</returns>
         private string replace(string baseTemplate)
         {
             foreach (KeyValuePair<string, string> dataPair in _replaceDict)

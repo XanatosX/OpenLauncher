@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace OpenLauncher.Core.Updater.DataModel.Events
 {
+    //NOTE maybe this class must be split into a base and an extended class later on!
+    /// <summary>
+    /// This class is a container for the status changed event
+    /// </summary>
     public class StatusChangedData
     {
         private int _lastStatus;
@@ -23,6 +27,13 @@ namespace OpenLauncher.Core.Updater.DataModel.Events
         private float _percentDone;
         public float PercentDone => _percentDone;
 
+        /// <summary>
+        /// This will create a new instance of this class
+        /// </summary>
+        /// <param name="lastStatus"></param>
+        /// <param name="newStatus"></param>
+        /// <param name="maxStatus"></param>
+        /// <param name="currentFile"></param>
         public StatusChangedData(int lastStatus, int newStatus, int maxStatus, UpdateableFile currentFile)
         {
             _lastStatus = lastStatus;

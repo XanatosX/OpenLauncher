@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace OpenLauncher.Core.Updater
 {
+    /// <summary>
+    /// This class will create a the server files from a project.
+    /// </summary>
     public class CreateDownloadableManager
     {
         private string _inputFolder;
@@ -20,6 +23,11 @@ namespace OpenLauncher.Core.Updater
 
         private ChecksumCalculator _checksumCalculator;
 
+        /// <summary>
+        /// Create a new instance of this class
+        /// </summary>
+        /// <param name="input">The path to the folder containing the base files</param>
+        /// <param name="output">The path to the folder to put the finished ready to upload files to</param>
         public CreateDownloadableManager(string input, string output)
         {
             _inputFolder = input;
@@ -29,6 +37,11 @@ namespace OpenLauncher.Core.Updater
             _updateConfiguration = new UpdaterConfigJSON();
         }
 
+        /// <summary>
+        /// This will get all the files recursive in the root directory
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns>Returns a list with all the files</returns>
         private List<string> getAllFiles(string root)
         {
             DirectoryInfo directoryData = new DirectoryInfo(root);
@@ -51,6 +64,10 @@ namespace OpenLauncher.Core.Updater
             return filesToReturn;
         }
 
+        /// <summary>
+        /// This function will generate all the needed data to save and copy the server data to the output folder
+        /// </summary>
+        /// <returns>Returns true if there was no error</returns>
         public bool CreateServerData()
         {
             List<string> files = getAllFiles(_inputFolder);
@@ -67,8 +84,10 @@ namespace OpenLauncher.Core.Updater
             return true;
         }
 
-
-
+        /// <summary>
+        /// This will finaly copy all the data you need for the server
+        /// </summary>
+        /// <param name="projectConfig">This is the project configuration file containing all the launchables.</param>
         public void SaveServerData(ProjectConfigJSON projectConfig = null)
         {
             CopyFiles();
@@ -81,6 +100,10 @@ namespace OpenLauncher.Core.Updater
             saveUpdateInfo();
         }
 
+        /// <summary>
+        /// This will save the project config file and add it to the update info file
+        /// </summary>
+        /// <param name="projectConfig"></param>
         private void saveProjectConfig(ProjectConfigJSON projectConfig)
         {
             string dataToSave = JsonConvert.SerializeObject(projectConfig);
@@ -100,6 +123,9 @@ namespace OpenLauncher.Core.Updater
             _updateConfiguration.Files.Add(updateableFile);
         }
 
+        /// <summary>
+        /// This functions copies all the files from the input to the output folder.
+        /// </summary>
         private void CopyFiles()
         {
             foreach (UpdateableFile currentUpdateFile in _updateConfiguration.Files)
@@ -115,6 +141,9 @@ namespace OpenLauncher.Core.Updater
             }
         }
 
+        /// <summary>
+        /// This function will save the update info file
+        /// </summary>
         private void saveUpdateInfo()
         {
             string dataToSave = JsonConvert.SerializeObject(_updateConfiguration, Formatting.Indented);

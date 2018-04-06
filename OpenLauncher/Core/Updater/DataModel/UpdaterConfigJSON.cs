@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpenLauncher.Core.Updater.DataModel
 {
+    /// <summary>
+    /// This is a dataholder for all the updateable files on the server
+    /// </summary>
     public class UpdaterConfigJSON
     {
         private List<UpdateableFile> _files;

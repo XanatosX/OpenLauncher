@@ -84,6 +84,9 @@ namespace OpenLauncher.Forms.FromControls
             LV_Launchables.Visible = true;
             LV_Launchables.Enabled = true;
 
+            PB_DownloadProgress.Visible = false;
+            L_Progress.Visible = false;
+
             LV_Launchables.Items.Clear();
 
             if (!Directory.Exists(_projectFolder))
@@ -158,18 +161,48 @@ namespace OpenLauncher.Forms.FromControls
         private void DownloadProject()
         {
             B_MainAction.Enabled = false;
+
             ProjectUpdateManager updater = new ProjectUpdateManager(_data);
+            updater.DownloadProgressChanged += Updater_DownloadProgressChanged;
+            updater.DownloadComplete += Updater_DownloadComplete;
+
+
             if (updater.ReadyForUpdate)
             {
-                updater.Update();
+                updater.UpdateAsync();
             }
-            B_MainAction.Enabled = true;
+
+        }
+
+        private void Updater_DownloadComplete(object sender, EventArgs e)
+        {
+            PB_DownloadProgress.Value = PB_DownloadProgress.Maximum;
+            L_Progress.Text = "Done";
             init();
+        }
+
+        private void Updater_DownloadProgressChanged(object sender, Core.Updater.DataModel.Events.StatusChangedData e)
+        {
+            PB_DownloadProgress.Visible = true;
+            L_Progress.Visible = true;
+            PB_DownloadProgress.Maximum = e.MaxStatus;
+            PB_DownloadProgress.Value = e.NewStatus;
+
+            L_Progress.Text = $"{e.PercentDone}% downloaded";
         }
 
         private void LaunchProject()
         {
-            Process.Start(_currentExecutable);
+
+            if (File.Exists(_currentExecutable))
+            {
+                Process.Start(_currentExecutable);
+            }
+            else
+            {
+                MessageBox.Show("Seems like the executable is missing, please check your folder or redownload the project", "Missing executable", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void B_OpenSite_Click(object sender, EventArgs e)

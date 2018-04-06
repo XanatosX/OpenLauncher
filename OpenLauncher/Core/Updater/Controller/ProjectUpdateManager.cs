@@ -5,8 +5,10 @@ using OpenLauncher.Core.Projects.DataModel;
 using OpenLauncher.Core.Settings;
 using OpenLauncher.Core.Settings.DataModel;
 using OpenLauncher.Core.Updater.DataModel;
+using OpenLauncher.Core.Updater.DataModel.Events;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,6 +27,15 @@ namespace OpenLauncher.Core.Updater
         private bool _readyForUpdate;
         public bool ReadyForUpdate => _readyForUpdate;
 
+        private BackgroundWorker _asyncUpdateProvider;
+        private int _lastUpdateState;
+        private int _maxUpdateStatus;
+
+        public event EventHandler<StatusChangedData> DownloadProgressChanged;
+        public event EventHandler DownloadComplete;
+        public event EventHandler Error;
+
+
         public ProjectUpdateManager(ProjectDataJSON projectData)
         {
             _data = projectData;
@@ -35,8 +46,16 @@ namespace OpenLauncher.Core.Updater
             _settingsManager.Load();
             _settings = _settingsManager.Settings;
 
+            _asyncUpdateProvider = new BackgroundWorker();
+            _asyncUpdateProvider.DoWork += _asyncProvider_DoAsyncUpdate;
+            _asyncUpdateProvider.WorkerReportsProgress = true;
+            _asyncUpdateProvider.ProgressChanged += _asyncUpdateProvider_UpdateStatusChanged;
+            _asyncUpdateProvider.RunWorkerCompleted += _asyncUpdateProvider_UpdateCompleted;
+
             setupProject();
         }
+
+
 
         private void setupProject()
         {
@@ -83,7 +102,48 @@ namespace OpenLauncher.Core.Updater
             return false;
         }
 
+        public void UpdateAsync()
+        {
+            _asyncUpdateProvider.RunWorkerAsync();
+        }
+
+
+        private void _asyncProvider_DoAsyncUpdate(object sender, DoWorkEventArgs e)
+        {
+            performUpdate(true);
+            e.Result = "done";
+        }
+
+        private void _asyncUpdateProvider_UpdateStatusChanged(object sender, ProgressChangedEventArgs e)
+        {
+            int currentStatus = e.ProgressPercentage;
+            UpdateableFile currentFile = null;
+
+            if (e.UserState.GetType() == typeof(UpdateableFile))
+            {
+                currentFile = (UpdateableFile)e.UserState;
+            }
+
+            StatusChangedData dataSet = new StatusChangedData(_lastUpdateState, currentStatus, _maxUpdateStatus, currentFile);
+            EventHandler<StatusChangedData> handle = DownloadProgressChanged;
+            handle?.Invoke(this, dataSet);
+
+
+            _lastUpdateState = currentStatus;
+        }
+
+        private void _asyncUpdateProvider_UpdateCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            EventHandler handle = DownloadComplete;
+            handle?.Invoke(this, null);
+        }
+
         public void Update()
+        {
+            performUpdate();
+        }
+
+        private void performUpdate(bool async = false)
         {
             if (!_readyForUpdate)
             {
@@ -100,6 +160,8 @@ namespace OpenLauncher.Core.Updater
 
             List<UpdateableFile> onlineFiles = updaterConfig.Files;
             ChecksumCalculator ChecksumCreator = new ChecksumCalculator();
+            int currentCount = 0;
+            _maxUpdateStatus = onlineFiles.Count;
             foreach (UpdateableFile currentServerFile in onlineFiles)
             {
                 string currentFile = _settings.MainProjectFolder + "\\" + _data.Name + "\\" + currentServerFile.Name;
@@ -108,7 +170,12 @@ namespace OpenLauncher.Core.Updater
                 if (localChecksum != currentServerFile.Checksum)
                 {
                     DownloadFile(_data.HomeURL + "/" + _projectManager.LauncherSettings.DownloadMainFolder + "/" + currentServerFile.Name, currentServerFile.Name);
+                    if (async)
+                    {
+                        _asyncUpdateProvider.ReportProgress(currentCount, currentServerFile);
+                    }
                 }
+                currentCount++;
             }
         }
 

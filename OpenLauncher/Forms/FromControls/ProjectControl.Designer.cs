@@ -34,6 +34,8 @@
             this.LV_Launchables = new System.Windows.Forms.ListView();
             this.TH_starter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.B_OpenFolder = new System.Windows.Forms.Button();
+            this.PB_DownloadProgress = new System.Windows.Forms.ProgressBar();
+            this.L_Progress = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // B_MainAction
@@ -90,10 +92,28 @@
             this.B_OpenFolder.UseVisualStyleBackColor = true;
             this.B_OpenFolder.Click += new System.EventHandler(this.B_OpenFolder_Click);
             // 
+            // PB_DownloadProgress
+            // 
+            this.PB_DownloadProgress.Location = new System.Drawing.Point(184, 359);
+            this.PB_DownloadProgress.Name = "PB_DownloadProgress";
+            this.PB_DownloadProgress.Size = new System.Drawing.Size(169, 23);
+            this.PB_DownloadProgress.TabIndex = 5;
+            // 
+            // L_Progress
+            // 
+            this.L_Progress.Location = new System.Drawing.Point(181, 385);
+            this.L_Progress.Name = "L_Progress";
+            this.L_Progress.Size = new System.Drawing.Size(172, 23);
+            this.L_Progress.TabIndex = 6;
+            this.L_Progress.Text = "L_PercentDone";
+            this.L_Progress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ProjectControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.L_Progress);
+            this.Controls.Add(this.PB_DownloadProgress);
             this.Controls.Add(this.B_OpenFolder);
             this.Controls.Add(this.LV_Launchables);
             this.Controls.Add(this.WB_ProjectMainPage);
@@ -114,5 +134,7 @@
         private System.Windows.Forms.ListView LV_Launchables;
         private System.Windows.Forms.ColumnHeader TH_starter;
         private System.Windows.Forms.Button B_OpenFolder;
+        private System.Windows.Forms.ProgressBar PB_DownloadProgress;
+        private System.Windows.Forms.Label L_Progress;
     }
 }

@@ -30,7 +30,6 @@
         {
             this.B_MainAction = new System.Windows.Forms.Button();
             this.B_OpenSite = new System.Windows.Forms.Button();
-            this.WB_ProjectMainPage = new System.Windows.Forms.WebBrowser();
             this.LV_Launchables = new System.Windows.Forms.ListView();
             this.TH_starter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.B_OpenFolder = new System.Windows.Forms.Button();
@@ -57,14 +56,6 @@
             this.B_OpenSite.Text = "Open Website";
             this.B_OpenSite.UseVisualStyleBackColor = true;
             this.B_OpenSite.Click += new System.EventHandler(this.B_OpenSite_Click);
-            // 
-            // WB_ProjectMainPage
-            // 
-            this.WB_ProjectMainPage.Location = new System.Drawing.Point(0, 0);
-            this.WB_ProjectMainPage.MinimumSize = new System.Drawing.Size(20, 20);
-            this.WB_ProjectMainPage.Name = "WB_ProjectMainPage";
-            this.WB_ProjectMainPage.Size = new System.Drawing.Size(636, 353);
-            this.WB_ProjectMainPage.TabIndex = 2;
             // 
             // LV_Launchables
             // 
@@ -116,7 +107,6 @@
             this.Controls.Add(this.PB_DownloadProgress);
             this.Controls.Add(this.B_OpenFolder);
             this.Controls.Add(this.LV_Launchables);
-            this.Controls.Add(this.WB_ProjectMainPage);
             this.Controls.Add(this.B_OpenSite);
             this.Controls.Add(this.B_MainAction);
             this.Name = "ProjectControl";
@@ -129,7 +119,6 @@
 
         private System.Windows.Forms.Button B_MainAction;
         private System.Windows.Forms.Button B_OpenSite;
-        private System.Windows.Forms.WebBrowser WB_ProjectMainPage;
         private System.Windows.Forms.ListView LV_Launchables;
         private System.Windows.Forms.ColumnHeader TH_starter;
         private System.Windows.Forms.Button B_OpenFolder;

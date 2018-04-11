@@ -171,6 +171,7 @@
             this.MainMenuStrip = this.MS_MainStrip;
             this.Name = "ProgramOverview";
             this.Text = "Open launcher";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProgramOverview_FormClosing);
             this.Load += new System.EventHandler(this.ProgrammOverview_Load);
             this.MS_MainStrip.ResumeLayout(false);
             this.MS_MainStrip.PerformLayout();

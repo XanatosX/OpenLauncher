@@ -15,6 +15,9 @@ using System.IO;
 using OpenLauncher.Core.Updater;
 using OpenLauncher.Core.Settings;
 using OpenLauncher.Core.Settings.DataModel;
+using CefSharp;
+using CefSharp.WinForms;
+using OpenLauncher.Core.Helper;
 
 namespace OpenLauncher.Forms.FromControls
 {
@@ -39,9 +42,14 @@ namespace OpenLauncher.Forms.FromControls
 
         private string _currentExecutable;
 
+        readonly ChromiumWebBrowser _browser;
+
         public ProjectControl(ProjectDataJson data)
         {
             InitializeComponent();
+            _browser = GetChromiumBrowserInstance();
+            this.Controls.Add(_browser);
+
             _data = data;
             SettingsManager settingsManager = new SettingsManager();
             settingsManager.Load();
@@ -49,8 +57,6 @@ namespace OpenLauncher.Forms.FromControls
 
             _projectFolder = _settings.MainProjectFolder + "\\" + _data.Name;
 
-
-            WB_ProjectMainPage.ScriptErrorsSuppressed = true;
             LV_Launchables.MultiSelect = false;
             LV_Launchables.FullRowSelect = true;
             LV_Launchables.HeaderStyle = ColumnHeaderStyle.None;
@@ -59,8 +65,7 @@ namespace OpenLauncher.Forms.FromControls
             Init();
             if (_data.WebUrl != null)
             {
-                //NOTE find a way to speed up the page loading. Maybe if the web browser is async
-                WB_ProjectMainPage.Url = _data.WebUrl;
+                _browser.Load(_data.WebUrl.ToString());
             }
             else
             {
@@ -69,11 +74,40 @@ namespace OpenLauncher.Forms.FromControls
                 templateEngine.AddReplacement("projectname", data.Name);
                 templateEngine.AddReplacement("imgsource", data.ImageUrl);
 
-                WB_ProjectMainPage.DocumentText = templateEngine.Get();
+                _browser.LoadHtml(templateEngine.Get());
                 B_OpenSite.Enabled = false;
             }
             
         }
+
+        private ChromiumWebBrowser GetChromiumBrowserInstance()
+        {
+            CefSettings settings = new CefSettings
+            {
+                BrowserSubprocessPath = @"x86\CefSharp.BrowserSubprocess.exe"
+            };
+            return GetChromiumBrowserInstance(settings);
+        }
+
+        private ChromiumWebBrowser GetChromiumBrowserInstance(CefSettings settings)
+        {
+            if (!Cef.IsInitialized)
+            {
+                Cef.Initialize(settings);
+            }
+
+            ChromiumWebBrowser browser = new ChromiumWebBrowser
+            {
+                Location = new Point(0, 0),
+                Size = new Size(636, 353)
+            };
+
+
+            return browser;
+            
+        }
+
+
 
         /// <summary>
         /// This will initialize the project, this includes loading the launchable file and checking if there is an update available

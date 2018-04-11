@@ -1,4 +1,5 @@
-﻿using OpenLauncher.Core.Projects;
+﻿using CefSharp;
+using OpenLauncher.Core.Projects;
 using OpenLauncher.Core.Projects.DataModel;
 using OpenLauncher.Forms.FromControls;
 using System;
@@ -219,6 +220,11 @@ namespace OpenLauncher.Forms
                     
                 LV_Projects.SelectedItems[0].Remove();
             }
+        }
+
+        private void ProgramOverview_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Cef.Shutdown();
         }
     }
 }

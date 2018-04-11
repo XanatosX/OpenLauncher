@@ -57,7 +57,7 @@ namespace OpenLauncher.Forms
                 manager.Add(currentFile);
             }
             manager.Save();
-            loadProjects();
+            LoadProjects();
         }
 
         /// <summary>
@@ -67,15 +67,17 @@ namespace OpenLauncher.Forms
         /// <param name="e"></param>
         private void CreateNewProject_Click(object sender, EventArgs e)
         {
-            NewProject newProject = new NewProject();
-            newProject.StartPosition = FormStartPosition.CenterParent;
+            NewProject newProject = new NewProject
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
             newProject.ShowDialog();
 
             if (newProject.AddProject)
             {
                 manager.Add(newProject.ProjectData);
                 manager.Save();
-                loadProjects();
+                LoadProjects();
             }
         }
 
@@ -90,7 +92,7 @@ namespace OpenLauncher.Forms
 
             manager.Add(LoadProjectDialog.FileName);
             manager.Save();
-            loadProjects();
+            LoadProjects();
         }
 
         /// <summary>
@@ -103,13 +105,13 @@ namespace OpenLauncher.Forms
             LV_Projects.Activation = ItemActivation.OneClick;
 
             manager = new ProjectManager();
-            loadProjects();
+            LoadProjects();
         }
 
         /// <summary>
         /// This function will load all the availables projects and set the up in the form
         /// </summary>
-        private void loadProjects()
+        private void LoadProjects()
         {
             manager.Load();
 
@@ -125,10 +127,12 @@ namespace OpenLauncher.Forms
                 {
                     IL_ProjectImages.Images.Add(currentProject.DisplayImage);
                 }
-                
-                ListViewItem item = new ListViewItem(currentProject.Name);
-                item.Tag = currentProject;
-                item.ImageIndex = i;
+
+                ListViewItem item = new ListViewItem(currentProject.Name)
+                {
+                    Tag = currentProject,
+                    ImageIndex = i
+                };
                 LV_Projects.Items.Add(item);
 
             }
@@ -161,9 +165,9 @@ namespace OpenLauncher.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void reloadProjects_Click(object sender, EventArgs e)
+        private void ReloadProjects_Click(object sender, EventArgs e)
         {
-            loadProjects();
+            LoadProjects();
         }
 
         /// <summary>
@@ -171,10 +175,12 @@ namespace OpenLauncher.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Settings SettingForm = new Settings();
-            SettingForm.StartPosition = FormStartPosition.CenterParent;
+            Settings SettingForm = new Settings
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
             SettingForm.ShowDialog();
         }
 
@@ -185,8 +191,10 @@ namespace OpenLauncher.Forms
         /// <param name="e"></param>
         private void CreateServerDownloadables_Click(object sender, EventArgs e)
         {
-            CreateServerDownloadable serverDownloadableForm = new CreateServerDownloadable();
-            serverDownloadableForm.StartPosition = FormStartPosition.CenterParent;
+            CreateServerDownloadable serverDownloadableForm = new CreateServerDownloadable
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
 
             serverDownloadableForm.ShowDialog();
         }
@@ -196,7 +204,7 @@ namespace OpenLauncher.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (LV_Projects.SelectedItems.Count > 0)
             {

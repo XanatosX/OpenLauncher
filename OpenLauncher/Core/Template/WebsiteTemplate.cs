@@ -11,9 +11,9 @@ namespace OpenLauncher.Core.Template
     /// <summary>
     /// This is a class for
     /// </summary>
-    public class WebsiteTemplate : TemplateInterface
+    public class WebsiteTemplate : ITemplate
     {
-        private string _templateFolder;
+        readonly string _templateFolder;
         private string _templateFile;
 
         private Dictionary<string, string> _replaceDict;
@@ -56,8 +56,8 @@ namespace OpenLauncher.Core.Template
                 return "";
             }
 
-            string finalTemplate = load();
-            finalTemplate = replace(finalTemplate);
+            string finalTemplate = Load();
+            finalTemplate = Replace(finalTemplate);
 
             return finalTemplate;
         }
@@ -66,7 +66,7 @@ namespace OpenLauncher.Core.Template
         /// This will load the template from the HDD
         /// </summary>
         /// <returns>Returns the content as string</returns>
-        private string load()
+        private string Load()
         {
             string template;
             using (StreamReader reader = new StreamReader(_templateFile))
@@ -82,7 +82,7 @@ namespace OpenLauncher.Core.Template
         /// </summary>
         /// <param name="baseTemplate"></param>
         /// <returns>Returns the template with the changed values</returns>
-        private string replace(string baseTemplate)
+        private string Replace(string baseTemplate)
         {
             foreach (KeyValuePair<string, string> dataPair in _replaceDict)
             {

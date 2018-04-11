@@ -20,8 +20,7 @@ namespace OpenLauncher.Core.Helper
         /// <returns></returns>
         public static string DownloadString(this string fileToDownload)
         {
-            Uri testUri = null;
-            Uri.TryCreate(fileToDownload, UriKind.Absolute, out testUri);
+            Uri.TryCreate(fileToDownload, UriKind.Absolute, out Uri testUri);
 
             if (testUri == null)
             {

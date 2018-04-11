@@ -57,10 +57,10 @@
     <Compile Include="Core\Projects\DataModel\LocalProject\ProjectDataJson.cs" />
     <Compile Include="Core\Projects\DataModel\LocalProject\ProjectList.cs" />
     <Compile Include="Core\Projects\DataModel\LocalProject\ProjectListJson.cs" />
-    <Compile Include="Core\Settings\DataModel\SettingsJSON.cs" />
+    <Compile Include="Core\Settings\DataModel\SettingsJson.cs" />
     <Compile Include="Core\Settings\SettingsManager.cs" />
     <Compile Include="Core\Helper\Extensions\FileDownloadExtension.cs" />
-    <Compile Include="Core\Template\TemplateInterface.cs" />
+    <Compile Include="Core\Template\ITemplate.cs" />
     <Compile Include="Core\Updater\CreateDownloadableManager.cs" />
     <Compile Include="Core\Updater\DataModel\Events\StatusChangedData.cs" />
     <Compile Include="Core\Updater\DataModel\UpdateableFile.cs" />

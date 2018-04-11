@@ -34,7 +34,7 @@ namespace OpenLauncher.Forms.FromControls
         private ProjectDataJson _data;
 
         private SettingsManager _settingsManager;
-        private SettingsJSON _settings;
+        private SettingsJson _settings;
 
         private string _projectFolder;
 
@@ -57,7 +57,7 @@ namespace OpenLauncher.Forms.FromControls
             LV_Launchables.HeaderStyle = ColumnHeaderStyle.None;
 
 
-            init();
+            Init();
             if (_data.WebUrl != null)
             {
                 //NOTE find a way to speed up the page loading. Maybe if the web browser is async
@@ -65,7 +65,7 @@ namespace OpenLauncher.Forms.FromControls
             }
             else
             {
-                TemplateInterface templateEngine = new WebsiteTemplate();
+                ITemplate templateEngine = new WebsiteTemplate();
                 templateEngine.SetTemplateFile("ProjectBasic.html");
                 templateEngine.AddReplacement("projectname", data.Name);
                 templateEngine.AddReplacement("imgsource", data.ImageUrl);
@@ -79,7 +79,7 @@ namespace OpenLauncher.Forms.FromControls
         /// <summary>
         /// This will initialize the project, this includes loading the launchable file and checking if there is an update available
         /// </summary>
-        private void init()
+        private void Init()
         {
             ProjectConfigManager projectConfigManager = new ProjectConfigManager(_data);
             List<LaunchableJson> launchables = projectConfigManager.GetLaunchables();
@@ -124,8 +124,10 @@ namespace OpenLauncher.Forms.FromControls
 
             foreach (LaunchableJson launchable in launchables)
             {
-                ListViewItem item = new ListViewItem(launchable.DisplayName);
-                item.Tag = launchable.Executable;
+                ListViewItem item = new ListViewItem(launchable.DisplayName)
+                {
+                    Tag = launchable.Executable
+                };
                 LV_Launchables.Items.Add(item);
             }
             if (B_MainAction.Enabled)
@@ -197,7 +199,7 @@ namespace OpenLauncher.Forms.FromControls
         {
             PB_DownloadProgress.Value = PB_DownloadProgress.Maximum;
             L_Progress.Text = "Done";
-            init();
+            Init();
         }
 
         /// <summary>
@@ -258,7 +260,7 @@ namespace OpenLauncher.Forms.FromControls
 
             if (File.Exists(_currentExecutable))
             {
-                if (needUpdate())
+                if (NeedUpdate())
                 {
                     B_MainAction.Text = "Update";
                     B_MainAction.Tag = ActionButtonMode.Update;
@@ -280,7 +282,7 @@ namespace OpenLauncher.Forms.FromControls
         /// This function will check if there is an update available
         /// </summary>
         /// <returns></returns>
-        private bool needUpdate()
+        private bool NeedUpdate()
         {
             ProjectUpdateManager updater = new ProjectUpdateManager(_data);
             return updater.UpdateAvailable();

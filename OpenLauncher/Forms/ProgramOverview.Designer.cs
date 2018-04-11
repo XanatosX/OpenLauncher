@@ -72,7 +72,7 @@
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // projectToolStripMenuItem
             // 
@@ -98,7 +98,7 @@
             this.reloadProjectsToolStripMenuItem1.Name = "reloadProjectsToolStripMenuItem1";
             this.reloadProjectsToolStripMenuItem1.Size = new System.Drawing.Size(225, 22);
             this.reloadProjectsToolStripMenuItem1.Text = "Reload projects";
-            this.reloadProjectsToolStripMenuItem1.Click += new System.EventHandler(this.reloadProjects_Click);
+            this.reloadProjectsToolStripMenuItem1.Click += new System.EventHandler(this.ReloadProjects_Click);
             // 
             // toolStripSeparator1
             // 
@@ -157,7 +157,7 @@
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
             // ProgramOverview
             // 

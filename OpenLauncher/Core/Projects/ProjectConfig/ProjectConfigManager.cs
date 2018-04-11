@@ -16,28 +16,27 @@ namespace OpenLauncher.Core.Projects
     /// </summary>
     public class ProjectConfigManager
     {
-        private string _baseURL;
-        private ProjectDataJson _data;
-
-        private SettingsManager _settingsManager;
-        private SettingsJSON _settings;
+        readonly ProjectDataJson _data;
+        
+        readonly SettingsJson _settings;
 
         private OpenLauncherSettingJson _launcherSettings;
         public OpenLauncherSettingJson LauncherSettings => _launcherSettings;
 
 
-        private string _openLauncherInfo;
+        readonly string _openLauncherInfo;
         public string OpenLauncherInfo => _openLauncherInfo;
 
-        private string _localProjectConfig;
+        readonly string _localProjectConfig;
         public string LocalProjectConfig => _localProjectConfig;
 
-        private string _serverProjectConfig;
+        readonly string _serverProjectConfig;
         public string ServerProjectConfig => _serverProjectConfig;
-        private string _updateInfo;
+
+        readonly string _updateInfo;
         public string UpdateInfo => _updateInfo;
 
-        private bool _downloadable;
+        readonly bool _downloadable;
         public bool Downloadable => _downloadable;
 
         private bool _localLauncherFileAvailable;
@@ -49,33 +48,33 @@ namespace OpenLauncher.Core.Projects
         /// <param name="data">The project file to create an instance of</param>
         public ProjectConfigManager(ProjectDataJson data)
         {
-            _settingsManager = new SettingsManager();
-            _settingsManager.Load();
-            _settings = _settingsManager.Settings;
+            SettingsManager settingsManager = new SettingsManager();
+            settingsManager.Load();
+            _settings = settingsManager.Settings;
 
             _data = data;
 
             _downloadable = false;
 
-            _baseURL = _data.HomeUrl;
-            _openLauncherInfo = _baseURL + "/OpenLauncher.json";
-            getOpenLauncherInfo();
+            string baseURL = _data.HomeUrl;
+            _openLauncherInfo = baseURL + "/OpenLauncher.json";
+            GetOpenLauncherInfo();
 
             _localProjectConfig = _settings.MainProjectFolder + "\\" + _data.Name + "\\ProjectConfig.json";
-            _localLauncherFileAvailable = checkLocalConfig();
+            _localLauncherFileAvailable = CheckLocalConfig();
             if (_launcherSettings == null)
             {
                 return;
             }
 
-            _serverProjectConfig = _baseURL + "/" + _launcherSettings.DownloadMainFolder +  "/ProjectConfig.json";   
-            _updateInfo = _baseURL + "/" + _launcherSettings.DownloadMainFolder + "/UpdateInfo.json";
+            _serverProjectConfig = baseURL + "/" + _launcherSettings.DownloadMainFolder +  "/ProjectConfig.json";   
+            _updateInfo = baseURL + "/" + _launcherSettings.DownloadMainFolder + "/UpdateInfo.json";
 
 
-            _downloadable = checkProjectConfig();
+            _downloadable = CheckProjectConfig();
             if (Downloadable)
             {
-                checkUpdateInfo();
+                CheckUpdateInfo();
             }
         }
 
@@ -112,7 +111,7 @@ namespace OpenLauncher.Core.Projects
         /// <summary>
         /// Get the basic information from the webserver where the main path can be found containing the project on the server.
         /// </summary>
-        private void getOpenLauncherInfo()
+        private void GetOpenLauncherInfo()
         {
             string openLauncherInfo = _openLauncherInfo.DownloadString();
             try
@@ -121,7 +120,7 @@ namespace OpenLauncher.Core.Projects
             }
             catch (Exception)
             {
-                throw;
+                _launcherSettings = null;
             }
         }
 
@@ -129,7 +128,7 @@ namespace OpenLauncher.Core.Projects
         /// Check the project configuration on the webserver. This will check if the file is available and parsable
         /// </summary>
         /// <returns>Returns true if file is parsable and available</returns>
-        private bool checkProjectConfig()
+        private bool CheckProjectConfig()
         {
             string projectConfig = _serverProjectConfig.DownloadString();
 
@@ -148,7 +147,7 @@ namespace OpenLauncher.Core.Projects
         /// This will check if there is local configuration file, this will return true if the file is present and parsable
         /// </summary>
         /// <returns>True if the file is parsable and available</returns>
-        private bool checkLocalConfig()
+        private bool CheckLocalConfig()
         {
             string localLauncherConfig = "";
             if (!File.Exists(_localProjectConfig))
@@ -175,7 +174,7 @@ namespace OpenLauncher.Core.Projects
         /// Checks if there is a update info file on the server which is parsable
         /// </summary>
         /// <returns>Returns true if the file is available and parsable</returns>
-        private bool checkUpdateInfo()
+        private bool CheckUpdateInfo()
         {
             string projectConfig = _updateInfo.DownloadString();
 

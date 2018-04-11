@@ -27,7 +27,7 @@ namespace OpenLauncher.Core.Updater
         private ProjectConfigManager _projectManager;
 
         private SettingsManager _settingsManager;
-        private SettingsJSON _settings;
+        private SettingsJson _settings;
 
         private bool _readyForUpdate;
         public bool ReadyForUpdate => _readyForUpdate;
@@ -60,13 +60,13 @@ namespace OpenLauncher.Core.Updater
             _asyncUpdateProvider.ProgressChanged += _asyncUpdateProvider_UpdateStatusChanged;
             _asyncUpdateProvider.RunWorkerCompleted += _asyncUpdateProvider_UpdateCompleted;
 
-            setupProject();
+            SetupProject();
         }
 
         /// <summary>
         /// This will setup all the needed project variables
         /// </summary>
-        private void setupProject()
+        private void SetupProject()
         {
             DirectoryInfo projectDirectory = new DirectoryInfo(_settings.MainProjectFolder + "\\" + _data.Name);
             if (!projectDirectory.Exists)
@@ -78,7 +78,7 @@ namespace OpenLauncher.Core.Updater
                 }
                 catch (Exception)
                 {
-                    triggerErrorEvent(ErrorEnum.error ,"Missing rights to create a folder. Please check the user rights for " + projectDirectory.FullName);
+                    TriggerErrorEvent(ErrorEnum.error ,"Missing rights to create a folder. Please check the user rights for " + projectDirectory.FullName);
                 }
             }
             else
@@ -93,7 +93,7 @@ namespace OpenLauncher.Core.Updater
         /// <returns>Returns true if one or more checksums are not identical with the server</returns>
         public bool UpdateAvailable()
         {
-            UpdaterConfigJSON serverConfig = getUpdaterConfigJSON();
+            UpdaterConfigJSON serverConfig = GetUpdaterConfigJSON();
             if (serverConfig == null)
             {
                 return false;
@@ -132,7 +132,7 @@ namespace OpenLauncher.Core.Updater
         /// <param name="e"></param>
         private void _asyncProvider_DoAsyncUpdate(object sender, DoWorkEventArgs e)
         {
-            performUpdate(true);
+            PerformUpdate(true);
             e.Result = "done";
         }
 
@@ -176,22 +176,22 @@ namespace OpenLauncher.Core.Updater
         /// </summary>
         public void Update()
         {
-            performUpdate();
+            PerformUpdate();
         }
 
         /// <summary>
         /// This is the real function for the update process the public functions just refer to this one
         /// </summary>
         /// <param name="async">This can be set to true to send out event updates</param>
-        private void performUpdate(bool async = false)
+        private void PerformUpdate(bool async = false)
         {
             if (!_readyForUpdate)
             {
-                triggerErrorEvent(ErrorEnum.warning, "Not ready for update yet!");
+                TriggerErrorEvent(ErrorEnum.warning, "Not ready for update yet!");
                 return;
             }
 
-            UpdaterConfigJSON updaterConfig = getUpdaterConfigJSON();
+            UpdaterConfigJSON updaterConfig = GetUpdaterConfigJSON();
 
             if (updaterConfig == null)
             {
@@ -222,7 +222,7 @@ namespace OpenLauncher.Core.Updater
         /// This will download the file list from the server containing the filename and the checksum
         /// </summary>
         /// <returns>Returns the server instance of the update list</returns>
-        private UpdaterConfigJSON getUpdaterConfigJSON()
+        private UpdaterConfigJSON GetUpdaterConfigJSON()
         {
             string updateInfo = _projectManager.UpdateInfo.DownloadString();
 
@@ -267,7 +267,7 @@ namespace OpenLauncher.Core.Updater
         /// This function will trigger an error event
         /// </summary>
         /// <param name="errorMessage"></param>
-        private void triggerErrorEvent(ErrorEnum errorLevel, string errorMessage)
+        private void TriggerErrorEvent(ErrorEnum errorLevel, string errorMessage)
         {
             EventHandler<ErrorEvent> handler = Error;
             ErrorEvent errorEvent = new ErrorEvent(errorLevel, errorMessage);

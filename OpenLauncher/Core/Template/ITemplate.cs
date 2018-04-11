@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenLauncher.Core.Template
 {
-    public interface  TemplateInterface
+    public interface  ITemplate
     {
         /// <summary>
         /// This will set a template file for the current template class

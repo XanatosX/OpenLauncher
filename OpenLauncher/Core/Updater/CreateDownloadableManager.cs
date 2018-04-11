@@ -39,7 +39,7 @@ namespace OpenLauncher.Core.Updater
         /// </summary>
         /// <param name="root"></param>
         /// <returns>Returns a list with all the files</returns>
-        private List<string> getAllFiles(string root)
+        private List<string> GetAllFiles(string root)
         {
             DirectoryInfo directoryData = new DirectoryInfo(root);
             List<string> filesToReturn = new List<string>();
@@ -55,7 +55,7 @@ namespace OpenLauncher.Core.Updater
 
             foreach (DirectoryInfo currentDirectory in directoryData.GetDirectories())
             {
-                filesToReturn.AddRange(getAllFiles(currentDirectory.FullName));
+                filesToReturn.AddRange(GetAllFiles(currentDirectory.FullName));
             }
 
             return filesToReturn;
@@ -67,12 +67,14 @@ namespace OpenLauncher.Core.Updater
         /// <returns>Returns true if there was no error</returns>
         public bool CreateServerData()
         {
-            List<string> files = getAllFiles(_inputFolder);
+            List<string> files = GetAllFiles(_inputFolder);
 
             foreach (string currentFile in files)
             {
-                UpdateableFile updateableFile = new UpdateableFile();
-                updateableFile.Name = currentFile;
+                UpdateableFile updateableFile = new UpdateableFile
+                {
+                    Name = currentFile
+                };
                 string currentLocalFile = _inputFolder + "\\" + currentFile;
                 updateableFile.Checksum = currentLocalFile.GetChecksum();
 
@@ -92,17 +94,17 @@ namespace OpenLauncher.Core.Updater
 
             if (projectConfig != null)
             {
-                saveProjectConfig(projectConfig);
+                SaveProjectConfig(projectConfig);
             }
 
-            saveUpdateInfo();
+            SaveUpdateInfo();
         }
 
         /// <summary>
         /// This will save the project config file and add it to the update info file
         /// </summary>
         /// <param name="projectConfig"></param>
-        private void saveProjectConfig(ProjectConfigJson projectConfig)
+        private void SaveProjectConfig(ProjectConfigJson projectConfig)
         {
             string dataToSave = JsonConvert.SerializeObject(projectConfig);
             string fileName = _outputFolder + "\\" + "ProjectConfig.json";
@@ -114,9 +116,11 @@ namespace OpenLauncher.Core.Updater
 
             string newFilename = fileName.Replace(_outputFolder + "\\", "");
 
-            UpdateableFile updateableFile = new UpdateableFile();
-            updateableFile.Name = newFilename;
-            updateableFile.Checksum = fileName.GetChecksum();
+            UpdateableFile updateableFile = new UpdateableFile
+            {
+                Name = newFilename,
+                Checksum = fileName.GetChecksum()
+            };
 
             _updateConfiguration.Files.Add(updateableFile);
         }
@@ -142,7 +146,7 @@ namespace OpenLauncher.Core.Updater
         /// <summary>
         /// This function will save the update info file
         /// </summary>
-        private void saveUpdateInfo()
+        private void SaveUpdateInfo()
         {
             string dataToSave = JsonConvert.SerializeObject(_updateConfiguration, Formatting.Indented);
             _updateConfiguration = new UpdaterConfigJSON();

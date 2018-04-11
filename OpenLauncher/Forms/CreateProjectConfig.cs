@@ -149,9 +149,11 @@ namespace OpenLauncher.Forms
             _projectConfigJSON = new ProjectConfigJson();
             foreach (ListViewItem item in LV_Executables.Items)
             {
-                LaunchableJson launchableJSON = new LaunchableJson();
-                launchableJSON.DisplayName = item.SubItems[1].Text;
-                launchableJSON.Executable = item.Text;
+                LaunchableJson launchableJSON = new LaunchableJson
+                {
+                    DisplayName = item.SubItems[1].Text,
+                    Executable = item.Text
+                };
 
                 _projectConfigJSON.Launchables.Add(launchableJSON);
             }

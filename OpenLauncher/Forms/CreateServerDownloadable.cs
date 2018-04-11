@@ -76,8 +76,10 @@ namespace OpenLauncher.Forms
             CreateProjectConfig projectConfig = null;
             if (DialogResult.Yes == MessageBox.Show("Do you want to create the project config as well?", "Create project config", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
-                projectConfig = new CreateProjectConfig(inputFolder);
-                projectConfig.StartPosition = FormStartPosition.CenterParent;
+                projectConfig = new CreateProjectConfig(inputFolder)
+                {
+                    StartPosition = FormStartPosition.CenterParent
+                };
 
                 projectConfig.ShowDialog();
 

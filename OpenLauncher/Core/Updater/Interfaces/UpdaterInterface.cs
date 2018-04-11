@@ -10,7 +10,7 @@ namespace OpenLauncher.Core.Updater
     /// <summary>
     /// This is a basic Interface for the updater
     /// </summary>
-    public interface UpdaterInterface
+    public interface IUpdater
     {
 
     }

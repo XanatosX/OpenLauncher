@@ -16,7 +16,7 @@ namespace OpenLauncher.Forms
     public partial class Settings : Form
     {
         private SettingsManager _settingManager;
-        private SettingsJSON _settings;
+        private SettingsJson _settings;
 
         public Settings()
         {

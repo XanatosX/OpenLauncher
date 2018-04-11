@@ -14,10 +14,10 @@ namespace OpenLauncher.Core.Settings
     /// </summary>
     public class SettingsManager
     {
-        private string _settingsFile;
+        readonly string _settingsFile;
 
-        private SettingsJSON _settings;
-        public SettingsJSON Settings => _settings;
+        private SettingsJson _settings;
+        public SettingsJson Settings => _settings;
 
         /// <summary>
         /// This will create a new empty instance of this class
@@ -32,7 +32,7 @@ namespace OpenLauncher.Core.Settings
         /// This will update the settings file on the HDD
         /// </summary>
         /// <param name="newSettings">This is the new settings file to parse and save</param>
-        public void Update(SettingsJSON newSettings)
+        public void Update(SettingsJson newSettings)
         {
             _settings = newSettings;
             Save();
@@ -45,7 +45,7 @@ namespace OpenLauncher.Core.Settings
         {
             if (!File.Exists(_settingsFile))
             {
-                _settings = new SettingsJSON();
+                _settings = new SettingsJson();
                 return;
             }
             string settingsContent = "";
@@ -54,7 +54,7 @@ namespace OpenLauncher.Core.Settings
                 settingsContent = reader.ReadToEnd();
             }
 
-            _settings =  JsonConvert.DeserializeObject<SettingsJSON>(settingsContent);
+            _settings =  JsonConvert.DeserializeObject<SettingsJson>(settingsContent);
         }
 
         /// <summary>

@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,14 +48,92 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Core\GlobalEnums\ErrorEnum.cs" />
+    <Compile Include="Core\GlobalEvents\ErrorEvent.cs" />
+    <Compile Include="Core\Helper\Extensions\ChecksumCalculator.cs" />
+    <Compile Include="Core\Projects\DataModel\ProjectConfig\LaunchableJson.cs" />
+    <Compile Include="Core\Projects\DataModel\ProjectConfig\OpenLauncherSettingJson.cs" />
+    <Compile Include="Core\Projects\DataModel\ProjectConfig\ProjectConfigJson.cs" />
+    <Compile Include="Core\Projects\DataModel\LocalProject\ProjectDataJson.cs" />
+    <Compile Include="Core\Projects\DataModel\LocalProject\ProjectList.cs" />
+    <Compile Include="Core\Projects\DataModel\LocalProject\ProjectListJson.cs" />
+    <Compile Include="Core\Settings\DataModel\SettingsJson.cs" />
+    <Compile Include="Core\Settings\SettingsManager.cs" />
+    <Compile Include="Core\Helper\Extensions\FileDownloadExtension.cs" />
+    <Compile Include="Core\Template\ITemplate.cs" />
+    <Compile Include="Core\Updater\CreateDownloadableManager.cs" />
+    <Compile Include="Core\Updater\DataModel\Events\StatusChangedData.cs" />
+    <Compile Include="Core\Updater\DataModel\UpdateableFile.cs" />
+    <Compile Include="Core\Updater\DataModel\UpdaterConfigJson.cs" />
+    <Compile Include="Core\Projects\ProjectConfig\ProjectConfigManager.cs" />
+    <Compile Include="Core\Projects\LocalProject\ProjectManager.cs" />
+    <Compile Include="Core\Updater\Controller\ProjectUpdateManager.cs" />
+    <Compile Include="Core\Template\WebsiteTemplate.cs" />
+    <Compile Include="Forms\CreateProjectConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\CreateProjectConfig.Designer.cs">
+      <DependentUpon>CreateProjectConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CreateServerDownloadable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CreateServerDownloadable.Designer.cs">
+      <DependentUpon>CreateServerDownloadable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FromControls\ProjectControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FromControls\ProjectControl.Designer.cs">
+      <DependentUpon>ProjectControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NewProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewProject.Designer.cs">
+      <DependentUpon>NewProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProgramOverview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProgramOverview.Designer.cs">
+      <DependentUpon>ProgramOverview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TextEntryDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TextEntryDialog.Designer.cs">
+      <DependentUpon>TextEntryDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\CreateProjectConfig.resx">
+      <DependentUpon>CreateProjectConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CreateServerDownloadable.resx">
+      <DependentUpon>CreateServerDownloadable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FromControls\ProjectControl.resx">
+      <DependentUpon>ProjectControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewProject.resx">
+      <DependentUpon>NewProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgramOverview.resx">
+      <DependentUpon>ProgramOverview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TextEntryDialog.resx">
+      <DependentUpon>TextEntryDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,6 +143,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -74,6 +156,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Templates\Websites\ProjectBasic.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

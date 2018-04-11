@@ -57,10 +57,5 @@ namespace OpenLauncher.Forms
 
             TB_MainProjectFolder.Text = FBD_FolderSelect.SelectedPath;
         }
-
-        private void Settings_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

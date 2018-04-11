@@ -23,16 +23,15 @@ namespace OpenLauncher.Core.Updater
     /// </summary>
     public class ProjectUpdateManager
     {
-        private ProjectDataJson _data;
-        private ProjectConfigManager _projectManager;
-
-        private SettingsManager _settingsManager;
-        private SettingsJson _settings;
+        readonly ProjectDataJson _data;
+        readonly ProjectConfigManager _projectManager;
+        
+        readonly SettingsJson _settings;
 
         private bool _readyForUpdate;
         public bool ReadyForUpdate => _readyForUpdate;
 
-        private BackgroundWorker _asyncUpdateProvider;
+        readonly BackgroundWorker _asyncUpdateProvider;
         private int _lastUpdateState;
         private int _maxUpdateStatus;
 
@@ -47,18 +46,18 @@ namespace OpenLauncher.Core.Updater
         public ProjectUpdateManager(ProjectDataJson projectData)
         {
             _data = projectData;
-            _settingsManager = new SettingsManager();
+            SettingsManager settingsManager = new SettingsManager();
 
             _projectManager = new ProjectConfigManager(_data);
 
-            _settingsManager.Load();
-            _settings = _settingsManager.Settings;
+            settingsManager.Load();
+            _settings = settingsManager.Settings;
 
             _asyncUpdateProvider = new BackgroundWorker();
-            _asyncUpdateProvider.DoWork += _asyncProvider_DoAsyncUpdate;
+            _asyncUpdateProvider.DoWork += AsyncProvider_DoAsyncUpdate;
             _asyncUpdateProvider.WorkerReportsProgress = true;
-            _asyncUpdateProvider.ProgressChanged += _asyncUpdateProvider_UpdateStatusChanged;
-            _asyncUpdateProvider.RunWorkerCompleted += _asyncUpdateProvider_UpdateCompleted;
+            _asyncUpdateProvider.ProgressChanged += AsyncUpdateProvider_UpdateStatusChanged;
+            _asyncUpdateProvider.RunWorkerCompleted += AsyncUpdateProvider_UpdateCompleted;
 
             SetupProject();
         }
@@ -93,7 +92,7 @@ namespace OpenLauncher.Core.Updater
         /// <returns>Returns true if one or more checksums are not identical with the server</returns>
         public bool UpdateAvailable()
         {
-            UpdaterConfigJSON serverConfig = GetUpdaterConfigJSON();
+            UpdaterConfigJson serverConfig = GetUpdaterConfigJson();
             if (serverConfig == null)
             {
                 return false;
@@ -130,7 +129,7 @@ namespace OpenLauncher.Core.Updater
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void _asyncProvider_DoAsyncUpdate(object sender, DoWorkEventArgs e)
+        private void AsyncProvider_DoAsyncUpdate(object sender, DoWorkEventArgs e)
         {
             PerformUpdate(true);
             e.Result = "done";
@@ -142,7 +141,7 @@ namespace OpenLauncher.Core.Updater
         /// <param name="sender"></param>
         /// <param name="e">This contains a number of how many files are downloaded, 
         /// how many files must be checked or downloaded and the last file successfully downloaded</param>
-        private void _asyncUpdateProvider_UpdateStatusChanged(object sender, ProgressChangedEventArgs e)
+        private void AsyncUpdateProvider_UpdateStatusChanged(object sender, ProgressChangedEventArgs e)
         {
             int currentStatus = e.ProgressPercentage;
             UpdateableFile currentFile = null;
@@ -165,7 +164,7 @@ namespace OpenLauncher.Core.Updater
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void _asyncUpdateProvider_UpdateCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void AsyncUpdateProvider_UpdateCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             EventHandler handle = DownloadComplete;
             handle?.Invoke(this, null);
@@ -182,8 +181,8 @@ namespace OpenLauncher.Core.Updater
         /// <summary>
         /// This is the real function for the update process the public functions just refer to this one
         /// </summary>
-        /// <param name="async">This can be set to true to send out event updates</param>
-        private void PerformUpdate(bool async = false)
+        /// <param name="isAsync">This can be set to true to send out event updates</param>
+        private void PerformUpdate(bool isAsync = false)
         {
             if (!_readyForUpdate)
             {
@@ -191,7 +190,7 @@ namespace OpenLauncher.Core.Updater
                 return;
             }
 
-            UpdaterConfigJSON updaterConfig = GetUpdaterConfigJSON();
+            UpdaterConfigJson updaterConfig = GetUpdaterConfigJson();
 
             if (updaterConfig == null)
             {
@@ -209,7 +208,7 @@ namespace OpenLauncher.Core.Updater
                 if (localChecksum != currentServerFile.Checksum)
                 {
                     DownloadFile(_data.HomeUrl + "/" + _projectManager.LauncherSettings.DownloadMainFolder + "/" + currentServerFile.Name, currentServerFile.Name);
-                    if (async)
+                    if (isAsync)
                     {
                         _asyncUpdateProvider.ReportProgress(currentCount, currentServerFile);
                     }
@@ -222,15 +221,15 @@ namespace OpenLauncher.Core.Updater
         /// This will download the file list from the server containing the filename and the checksum
         /// </summary>
         /// <returns>Returns the server instance of the update list</returns>
-        private UpdaterConfigJSON GetUpdaterConfigJSON()
+        private UpdaterConfigJson GetUpdaterConfigJson()
         {
             string updateInfo = _projectManager.UpdateInfo.DownloadString();
 
-            UpdaterConfigJSON updaterConfig = null;
+            UpdaterConfigJson updaterConfig = null;
 
             try
             {
-                updaterConfig = JsonConvert.DeserializeObject<UpdaterConfigJSON>(updateInfo);
+                updaterConfig = JsonConvert.DeserializeObject<UpdaterConfigJson>(updateInfo);
             }
             catch (Exception)
             {
@@ -271,7 +270,7 @@ namespace OpenLauncher.Core.Updater
         {
             EventHandler<ErrorEvent> handler = Error;
             ErrorEvent errorEvent = new ErrorEvent(errorLevel, errorMessage);
-            handler?.Invoke(this, null);
+            handler?.Invoke(this, errorEvent);
         }
     }
 }

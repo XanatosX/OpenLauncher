@@ -23,7 +23,7 @@ namespace OpenLauncher.Forms
         /// </summary>
         /// <param name="dialogName">This is the name of the window</param>
         /// <param name="preset">This is the default value of the textbox on the input form</param>
-        public TextEntryDialog(string dialogName, string preset = "")
+        public TextEntryDialog(string dialogName, string preset)
         {
             InitializeComponent();
             Text = dialogName;

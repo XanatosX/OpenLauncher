@@ -16,7 +16,7 @@ namespace OpenLauncher.Core.Template
         readonly string _templateFolder;
         private string _templateFile;
 
-        private Dictionary<string, string> _replaceDict;
+        readonly Dictionary<string, string> _replaceDict;
 
         /// <summary>
         /// This will create a new empty instance of the class
@@ -84,12 +84,13 @@ namespace OpenLauncher.Core.Template
         /// <returns>Returns the template with the changed values</returns>
         private string Replace(string baseTemplate)
         {
+            string returnValue = String.Empty;
             foreach (KeyValuePair<string, string> dataPair in _replaceDict)
             {
-                baseTemplate = baseTemplate.Replace("%" + dataPair.Key + "%", dataPair.Value);
+                returnValue = baseTemplate.Replace("%" + dataPair.Key + "%", dataPair.Value);
             }
 
-            return baseTemplate;
+            return returnValue;
         }
     }
 }

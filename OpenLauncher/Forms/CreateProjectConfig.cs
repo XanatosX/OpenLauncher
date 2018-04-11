@@ -17,10 +17,10 @@ namespace OpenLauncher.Forms
     /// </summary>
     public partial class CreateProjectConfig : Form
     {
-        private string _baseFolder;
+        readonly string _baseFolder;
 
-        private ProjectConfigJson _projectConfigJSON;
-        public ProjectConfigJson ProjectConfigJSON => _projectConfigJSON;
+        private ProjectConfigJson _projectConfigJson;
+        public ProjectConfigJson ProjectConfigJson => _projectConfigJson;
 
         /// <summary>
         /// This will create a new instance of this form
@@ -146,7 +146,7 @@ namespace OpenLauncher.Forms
         /// <param name="e"></param>
         private void B_Done_Click(object sender, EventArgs e)
         {
-            _projectConfigJSON = new ProjectConfigJson();
+            _projectConfigJson = new ProjectConfigJson();
             foreach (ListViewItem item in LV_Executables.Items)
             {
                 LaunchableJson launchableJSON = new LaunchableJson
@@ -155,7 +155,7 @@ namespace OpenLauncher.Forms
                     Executable = item.Text
                 };
 
-                _projectConfigJSON.Launchables.Add(launchableJSON);
+                _projectConfigJson.Launchables.Add(launchableJSON);
             }
 
             this.Close();

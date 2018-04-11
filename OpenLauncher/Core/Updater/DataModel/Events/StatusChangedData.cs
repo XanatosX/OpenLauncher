@@ -12,19 +12,19 @@ namespace OpenLauncher.Core.Updater.DataModel.Events
     /// </summary>
     public class StatusChangedData
     {
-        private int _lastStatus;
+        readonly int _lastStatus;
         public int LastStatus => _lastStatus;
 
-        private int _newStatus;
+        readonly int _newStatus;
         public int NewStatus => _newStatus;
 
-        private int _maxStatus;
+        readonly int _maxStatus;
         public int MaxStatus => _maxStatus;
 
-        private UpdateableFile _currentFile;
+        readonly UpdateableFile _currentFile;
         public UpdateableFile CurrentFile => _currentFile;
 
-        private float _percentDone;
+        readonly float _percentDone;
         public float PercentDone => _percentDone;
 
         /// <summary>

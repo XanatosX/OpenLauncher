@@ -39,7 +39,7 @@ namespace OpenLauncher.Core.Projects
         readonly bool _downloadable;
         public bool Downloadable => _downloadable;
 
-        private bool _localLauncherFileAvailable;
+        readonly bool _localLauncherFileAvailable;
         public bool LocalLauncherFileAvailable => _localLauncherFileAvailable;
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace OpenLauncher.Core.Projects
             _downloadable = CheckProjectConfig();
             if (Downloadable)
             {
-                CheckUpdateInfo();
+                _downloadable = CheckUpdateInfo();
             }
         }
 
@@ -178,7 +178,7 @@ namespace OpenLauncher.Core.Projects
         {
             string projectConfig = _updateInfo.DownloadString();
 
-            return true;
+            return projectConfig == string.Empty ? false : true;
         }
     }
 }

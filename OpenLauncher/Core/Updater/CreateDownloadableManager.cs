@@ -16,10 +16,10 @@ namespace OpenLauncher.Core.Updater
     /// </summary>
     public class CreateDownloadableManager
     {
-        private string _inputFolder;
-        private string _outputFolder;
+        readonly string _inputFolder;
+        readonly string _outputFolder;
 
-        private UpdaterConfigJSON _updateConfiguration;
+        private UpdaterConfigJson _updateConfiguration;
 
         /// <summary>
         /// Create a new instance of this class
@@ -31,7 +31,7 @@ namespace OpenLauncher.Core.Updater
             _inputFolder = input;
             _outputFolder = output;
             
-            _updateConfiguration = new UpdaterConfigJSON();
+            _updateConfiguration = new UpdaterConfigJson();
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace OpenLauncher.Core.Updater
         /// This will finaly copy all the data you need for the server
         /// </summary>
         /// <param name="projectConfig">This is the project configuration file containing all the launchables.</param>
-        public void SaveServerData(ProjectConfigJson projectConfig = null)
+        public void SaveServerData(ProjectConfigJson projectConfig)
         {
             CopyFiles();
 
@@ -149,7 +149,7 @@ namespace OpenLauncher.Core.Updater
         private void SaveUpdateInfo()
         {
             string dataToSave = JsonConvert.SerializeObject(_updateConfiguration, Formatting.Indented);
-            _updateConfiguration = new UpdaterConfigJSON();
+            _updateConfiguration = new UpdaterConfigJson();
             string fileName = _outputFolder + "\\" + "UpdateInfo.json";
 
             using (StreamWriter writer = new StreamWriter(fileName))

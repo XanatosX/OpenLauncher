@@ -64,11 +64,10 @@
     <Compile Include="Core\Updater\CreateDownloadableManager.cs" />
     <Compile Include="Core\Updater\DataModel\Events\StatusChangedData.cs" />
     <Compile Include="Core\Updater\DataModel\UpdateableFile.cs" />
-    <Compile Include="Core\Updater\DataModel\UpdaterConfigJSON.cs" />
+    <Compile Include="Core\Updater\DataModel\UpdaterConfigJson.cs" />
     <Compile Include="Core\Projects\ProjectConfig\ProjectConfigManager.cs" />
     <Compile Include="Core\Projects\LocalProject\ProjectManager.cs" />
     <Compile Include="Core\Updater\Controller\ProjectUpdateManager.cs" />
-    <Compile Include="Core\Updater\Interfaces\UpdaterInterface.cs" />
     <Compile Include="Core\Template\WebsiteTemplate.cs" />
     <Compile Include="Forms\CreateProjectConfig.cs">
       <SubType>Form</SubType>

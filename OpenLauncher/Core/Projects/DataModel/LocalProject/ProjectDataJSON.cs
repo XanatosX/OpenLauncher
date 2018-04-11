@@ -85,7 +85,7 @@ namespace OpenLauncher.Core.Projects.DataModel
         public void CreateEnrichedContent()
         {
             DownloadImage();
-            CreateURL();
+            CreateUrl();
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace OpenLauncher.Core.Projects.DataModel
         /// <summary>
         /// This will check the _homeURL and will create a Uri out of it
         /// </summary>
-        public void CreateURL()
+        public void CreateUrl()
         {
             Uri.TryCreate(_homeURL, UriKind.Absolute, out _webUrl);
         }

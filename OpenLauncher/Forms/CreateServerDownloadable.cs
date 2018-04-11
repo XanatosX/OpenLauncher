@@ -88,7 +88,7 @@ namespace OpenLauncher.Forms
             ProjectConfigJson dataJSON = null;
             if (projectConfig != null)
             {
-                dataJSON = projectConfig.ProjectConfigJSON;
+                dataJSON = projectConfig.ProjectConfigJson;
             }
 
             createDownloadable.SaveServerData(dataJSON);

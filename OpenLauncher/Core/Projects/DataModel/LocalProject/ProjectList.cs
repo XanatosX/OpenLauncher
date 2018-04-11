@@ -11,7 +11,7 @@ namespace OpenLauncher.Core.Projects.DataModel
     /// </summary>
     public class ProjectList
     {
-        private List<ProjectDataJson> _dataJson;
+        readonly List<ProjectDataJson> _dataJson;
         public List<ProjectDataJson> DataJson => _dataJson;
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace OpenLauncher.Core.Updater.DataModel
     /// <summary>
     /// This is a dataholder for all the updateable files on the server
     /// </summary>
-    public class UpdaterConfigJSON
+    public class UpdaterConfigJson
     {
         private List<UpdateableFile> _files;
         public List<UpdateableFile> Files
@@ -24,7 +24,7 @@ namespace OpenLauncher.Core.Updater.DataModel
             }
         }
 
-        public UpdaterConfigJSON()
+        public UpdaterConfigJson()
         {
             _files = new List<UpdateableFile>();
         }

@@ -21,8 +21,6 @@ namespace OpenLauncher.Core.Updater
 
         private UpdaterConfigJSON _updateConfiguration;
 
-        private ChecksumCalculator _checksumCalculator;
-
         /// <summary>
         /// Create a new instance of this class
         /// </summary>
@@ -32,8 +30,7 @@ namespace OpenLauncher.Core.Updater
         {
             _inputFolder = input;
             _outputFolder = output;
-
-            _checksumCalculator = new ChecksumCalculator();
+            
             _updateConfiguration = new UpdaterConfigJSON();
         }
 
@@ -76,7 +73,8 @@ namespace OpenLauncher.Core.Updater
             {
                 UpdateableFile updateableFile = new UpdateableFile();
                 updateableFile.Name = currentFile;
-                updateableFile.Checksum = _checksumCalculator.GetChecksum(_inputFolder + "\\" + currentFile);
+                string currentLocalFile = _inputFolder + "\\" + currentFile;
+                updateableFile.Checksum = currentLocalFile.GetChecksum();
 
                 _updateConfiguration.Files.Add(updateableFile);
             }
@@ -118,7 +116,7 @@ namespace OpenLauncher.Core.Updater
 
             UpdateableFile updateableFile = new UpdateableFile();
             updateableFile.Name = newFilename;
-            updateableFile.Checksum = _checksumCalculator.GetChecksum(fileName);
+            updateableFile.Checksum = fileName.GetChecksum();
 
             _updateConfiguration.Files.Add(updateableFile);
         }

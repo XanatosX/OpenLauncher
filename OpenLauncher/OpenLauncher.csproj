@@ -59,7 +59,7 @@
     <Compile Include="Core\Projects\DataModel\LocalProject\ProjectListJSON.cs" />
     <Compile Include="Core\Settings\DataModel\SettingsJSON.cs" />
     <Compile Include="Core\Settings\SettingsManager.cs" />
-    <Compile Include="Core\Helper\FileDownloader.cs" />
+    <Compile Include="Core\Helper\Extensions\FileDownloadExtension.cs" />
     <Compile Include="Core\Template\TemplateInterface.cs" />
     <Compile Include="Core\Updater\CreateDownloadableManager.cs" />
     <Compile Include="Core\Updater\DataModel\Events\StatusChangedData.cs" />

@@ -99,13 +99,12 @@ namespace OpenLauncher.Core.Updater
                 return false;
             }
             string baseFolder = _settings.MainProjectFolder + "\\" + _data.Name;
-            ChecksumCalculator ChecksumCreator = new ChecksumCalculator();
             foreach (UpdateableFile currentServerFile in serverConfig.Files)
             {
                 string localFile = baseFolder + "\\" + currentServerFile.Name;
 
 
-                string localChecksum = ChecksumCreator.GetChecksum(localFile);
+                string localChecksum = localFile.GetChecksum();
                 if (localChecksum != currentServerFile.Checksum)
                 {
                     return true;
@@ -200,13 +199,12 @@ namespace OpenLauncher.Core.Updater
             }
 
             List<UpdateableFile> onlineFiles = updaterConfig.Files;
-            ChecksumCalculator ChecksumCreator = new ChecksumCalculator();
             int currentCount = 0;
             _maxUpdateStatus = onlineFiles.Count;
             foreach (UpdateableFile currentServerFile in onlineFiles)
             {
                 string currentFile = _settings.MainProjectFolder + "\\" + _data.Name + "\\" + currentServerFile.Name;
-                string localChecksum = ChecksumCreator.GetChecksum(currentFile);
+                string localChecksum = currentFile.GetChecksum();
 
                 if (localChecksum != currentServerFile.Checksum)
                 {

@@ -16,7 +16,7 @@ namespace OpenLauncher.Core.GlobalEvents
         public ErrorEnum ErrorLevel => _errorLevel;
 
         readonly string _errorMessage;
-        public string ErrorMessage;
+        public string ErrorMessage => _errorMessage;
 
         readonly string _shortMessage;
         public string ShortErrorMessage => _shortMessage;

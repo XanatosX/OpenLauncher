@@ -15,8 +15,7 @@ namespace OpenLauncher.Core.Projects
     /// </summary>
     public class ProjectManager
     {
-        private string _settingsFolder;
-        private string _projectFile;
+        readonly string _projectFile;
 
         private ProjectList _projects;
         public List<ProjectDataJson> Projects => _projects.DataJson;
@@ -27,15 +26,15 @@ namespace OpenLauncher.Core.Projects
         public ProjectManager()
         {
             _projects = new ProjectList();
-            _settingsFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            _settingsFolder = _settingsFolder + "\\OpenLauncher";
+            string settingsFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            settingsFolder = settingsFolder + "\\OpenLauncher";
 
-            if (!Directory.Exists(_settingsFolder))
+            if (!Directory.Exists(settingsFolder))
             {
-                Directory.CreateDirectory(_settingsFolder);
+                Directory.CreateDirectory(settingsFolder);
             }
 
-            _projectFile = _settingsFolder + "\\projects.json";
+            _projectFile = settingsFolder + "\\projects.json";
         }
 
         /// <summary>
@@ -134,7 +133,6 @@ namespace OpenLauncher.Core.Projects
             {
                 writer.Write(saveString);
             }
-            return;
         }
 
     }

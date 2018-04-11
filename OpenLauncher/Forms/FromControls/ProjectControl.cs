@@ -161,6 +161,7 @@ namespace OpenLauncher.Forms.FromControls
                     DownloadProject();
                     break;
                 case ActionButtonMode.Launch:
+                default:
                     LaunchProject();
                     break;
             }

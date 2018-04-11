@@ -57,6 +57,10 @@ namespace OpenLauncher.Core.Projects
             try
             {
                 ProjectDataJson loadetObject = JsonConvert.DeserializeObject<ProjectDataJson>(fileData);
+                if (loadetObject.DisplayImage == null && loadetObject.HomeUrl == null)
+                {
+                    return;
+                }
                 Add(loadetObject);
             }
             catch (Exception)

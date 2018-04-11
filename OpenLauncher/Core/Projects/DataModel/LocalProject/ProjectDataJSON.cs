@@ -13,10 +13,10 @@ namespace OpenLauncher.Core.Projects.DataModel
     /// <summary>
     /// This is a data model for the project data. This is what is getting shown to the left in the main window
     /// </summary>
-    public class ProjectDataJSON
+    public class ProjectDataJson
     {
         private string _guid;
-        public string GUID
+        public string Guid
         {
             get
             {
@@ -55,7 +55,7 @@ namespace OpenLauncher.Core.Projects.DataModel
         }
 
         private string _homeURL;
-        public string HomeURL
+        public string HomeUrl
         {
             get
             {
@@ -74,10 +74,10 @@ namespace OpenLauncher.Core.Projects.DataModel
         public Bitmap DisplayImage => _displayImage;
 
         
-        private Uri _webURL;
+        private Uri _webUrl;
 
         [JsonIgnore]
-        public Uri WebURL => _webURL;
+        public Uri WebUrl => _webUrl;
 
         /// <summary>
         /// This will create the enriched content. Filling up the WebURL and the DisplayImage
@@ -113,7 +113,7 @@ namespace OpenLauncher.Core.Projects.DataModel
         /// </summary>
         public void CreateURL()
         {
-            Uri.TryCreate(_homeURL, UriKind.Absolute, out _webURL);
+            Uri.TryCreate(_homeURL, UriKind.Absolute, out _webUrl);
         }
     }
 }

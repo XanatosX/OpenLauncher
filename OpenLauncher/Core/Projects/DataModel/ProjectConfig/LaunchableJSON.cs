@@ -9,7 +9,7 @@ namespace OpenLauncher.Core.Projects.DataModel
     /// <summary>
     /// This class representd a launchable entry in a project. There is a string for the executable relativ to the main project folder
     /// </summary>
-    public class LaunchableJSON
+    public class LaunchableJson
     {
         private string _displayName;
         public string DisplayName

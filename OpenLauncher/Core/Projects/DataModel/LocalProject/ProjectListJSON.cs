@@ -9,10 +9,10 @@ namespace OpenLauncher.Core.Projects.DataModel
     /// <summary>
     /// This is a data holder for all the available projects in the launcher
     /// </summary>
-    public class ProjectListJSON
+    public class ProjectListJson
     {
-        private List<ProjectDataJSON> _dataJSON;
-        public List<ProjectDataJSON> DataJson
+        private List<ProjectDataJson> _dataJSON;
+        public List<ProjectDataJson> DataJson
         {
             get
             {

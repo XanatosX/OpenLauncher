@@ -17,13 +17,13 @@ namespace OpenLauncher.Core.Projects
     public class ProjectConfigManager
     {
         private string _baseURL;
-        private ProjectDataJSON _data;
+        private ProjectDataJson _data;
 
         private SettingsManager _settingsManager;
         private SettingsJSON _settings;
 
-        private OpenLauncherSettingJSON _launcherSettings;
-        public OpenLauncherSettingJSON LauncherSettings => _launcherSettings;
+        private OpenLauncherSettingJson _launcherSettings;
+        public OpenLauncherSettingJson LauncherSettings => _launcherSettings;
 
 
         private string _openLauncherInfo;
@@ -47,7 +47,7 @@ namespace OpenLauncher.Core.Projects
         /// Create a new instance of this class for a project
         /// </summary>
         /// <param name="data">The project file to create an instance of</param>
-        public ProjectConfigManager(ProjectDataJSON data)
+        public ProjectConfigManager(ProjectDataJson data)
         {
             _settingsManager = new SettingsManager();
             _settingsManager.Load();
@@ -57,7 +57,7 @@ namespace OpenLauncher.Core.Projects
 
             _downloadable = false;
 
-            _baseURL = _data.HomeURL;
+            _baseURL = _data.HomeUrl;
             _openLauncherInfo = _baseURL + "/OpenLauncher.json";
             getOpenLauncherInfo();
 
@@ -83,27 +83,27 @@ namespace OpenLauncher.Core.Projects
         /// Get all the launchable paths to show in the main window
         /// </summary>
         /// <returns>Returns a list with all the launchables of this project. This will be empty if there is no local file!</returns>
-        public List<LaunchableJSON> GetLaunchables()
+        public List<LaunchableJson> GetLaunchables()
         {
             if (!_localLauncherFileAvailable)
             {
-                return new List<LaunchableJSON>();
+                return new List<LaunchableJson>();
             }
             string projectConfig = _settings.MainProjectFolder + "\\" + _data.Name + "\\ProjectConfig.json";
             if (!File.Exists(projectConfig))
             {
-                return new List<LaunchableJSON>();
+                return new List<LaunchableJson>();
             }
 
             using (StreamReader reader = new StreamReader(projectConfig))
             {
                 try
                 {
-                    return JsonConvert.DeserializeObject<ProjectConfigJSON>(reader.ReadToEnd()).Launchables;
+                    return JsonConvert.DeserializeObject<ProjectConfigJson>(reader.ReadToEnd()).Launchables;
                 }
                 catch (Exception)
                 {
-                    return new List<LaunchableJSON>();
+                    return new List<LaunchableJson>();
                 }
                 
             }
@@ -117,7 +117,7 @@ namespace OpenLauncher.Core.Projects
             string openLauncherInfo = _openLauncherInfo.DownloadString();
             try
             {
-                _launcherSettings = JsonConvert.DeserializeObject<OpenLauncherSettingJSON>(openLauncherInfo);
+                _launcherSettings = JsonConvert.DeserializeObject<OpenLauncherSettingJson>(openLauncherInfo);
             }
             catch (Exception)
             {
@@ -135,7 +135,7 @@ namespace OpenLauncher.Core.Projects
 
             try
             {
-                JsonConvert.DeserializeObject<ProjectConfigJSON>(projectConfig);
+                JsonConvert.DeserializeObject<ProjectConfigJson>(projectConfig);
                 return true;
             }
             catch (Exception)
@@ -162,7 +162,7 @@ namespace OpenLauncher.Core.Projects
 
             try
             {
-                JsonConvert.DeserializeObject<ProjectConfigJSON>(localLauncherConfig);
+                JsonConvert.DeserializeObject<ProjectConfigJson>(localLauncherConfig);
                 return true;
             }
             catch (Exception)

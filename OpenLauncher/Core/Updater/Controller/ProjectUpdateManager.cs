@@ -23,7 +23,7 @@ namespace OpenLauncher.Core.Updater
     /// </summary>
     public class ProjectUpdateManager
     {
-        private ProjectDataJSON _data;
+        private ProjectDataJson _data;
         private ProjectConfigManager _projectManager;
 
         private SettingsManager _settingsManager;
@@ -44,7 +44,7 @@ namespace OpenLauncher.Core.Updater
         /// This will create a a new updater for a project
         /// </summary>
         /// <param name="projectData">This is the dataset for the project to create an updater for</param>
-        public ProjectUpdateManager(ProjectDataJSON projectData)
+        public ProjectUpdateManager(ProjectDataJson projectData)
         {
             _data = projectData;
             _settingsManager = new SettingsManager();
@@ -208,7 +208,7 @@ namespace OpenLauncher.Core.Updater
 
                 if (localChecksum != currentServerFile.Checksum)
                 {
-                    DownloadFile(_data.HomeURL + "/" + _projectManager.LauncherSettings.DownloadMainFolder + "/" + currentServerFile.Name, currentServerFile.Name);
+                    DownloadFile(_data.HomeUrl + "/" + _projectManager.LauncherSettings.DownloadMainFolder + "/" + currentServerFile.Name, currentServerFile.Name);
                     if (async)
                     {
                         _asyncUpdateProvider.ReportProgress(currentCount, currentServerFile);

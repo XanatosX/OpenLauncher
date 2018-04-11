@@ -51,12 +51,12 @@
     <Compile Include="Core\GlobalEnums\ErrorEnum.cs" />
     <Compile Include="Core\GlobalEvents\ErrorEvent.cs" />
     <Compile Include="Core\Helper\Extensions\ChecksumCalculator.cs" />
-    <Compile Include="Core\Projects\DataModel\ProjectConfig\LaunchableJSON.cs" />
-    <Compile Include="Core\Projects\DataModel\ProjectConfig\OpenLauncherSettingJSON.cs" />
-    <Compile Include="Core\Projects\DataModel\ProjectConfig\ProjectConfigJSON.cs" />
-    <Compile Include="Core\Projects\DataModel\LocalProject\ProjectDataJSON.cs" />
+    <Compile Include="Core\Projects\DataModel\ProjectConfig\LaunchableJson.cs" />
+    <Compile Include="Core\Projects\DataModel\ProjectConfig\OpenLauncherSettingJson.cs" />
+    <Compile Include="Core\Projects\DataModel\ProjectConfig\ProjectConfigJson.cs" />
+    <Compile Include="Core\Projects\DataModel\LocalProject\ProjectDataJson.cs" />
     <Compile Include="Core\Projects\DataModel\LocalProject\ProjectList.cs" />
-    <Compile Include="Core\Projects\DataModel\LocalProject\ProjectListJSON.cs" />
+    <Compile Include="Core\Projects\DataModel\LocalProject\ProjectListJson.cs" />
     <Compile Include="Core\Settings\DataModel\SettingsJSON.cs" />
     <Compile Include="Core\Settings\SettingsManager.cs" />
     <Compile Include="Core\Helper\Extensions\FileDownloadExtension.cs" />

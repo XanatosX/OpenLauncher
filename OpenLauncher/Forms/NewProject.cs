@@ -21,8 +21,8 @@ namespace OpenLauncher.Forms
         private bool _addProject;
         public bool AddProject => _addProject;
 
-        private ProjectDataJSON _projectData;
-        public ProjectDataJSON ProjectData => _projectData;
+        private ProjectDataJson _projectData;
+        public ProjectDataJson ProjectData => _projectData;
 
         /// <summary>
         /// This will create a new instance of this class
@@ -42,11 +42,11 @@ namespace OpenLauncher.Forms
         private void B_Save_Click(object sender, EventArgs e)
         {
             _addProject = CB_AddProject.Checked;
-            ProjectDataJSON jsonData = new ProjectDataJSON()
+            ProjectDataJson jsonData = new ProjectDataJson()
             {
                 Name = TB_ProjectName.Text,
                 ImageUrl = TB_ImageURL.Text,
-                HomeURL = TB_ProjectHomeURL.Text,
+                HomeUrl = TB_ProjectHomeURL.Text,
             };
 
             if (_addProject)

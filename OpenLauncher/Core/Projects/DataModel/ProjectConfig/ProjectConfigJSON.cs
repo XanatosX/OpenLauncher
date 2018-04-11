@@ -9,10 +9,10 @@ namespace OpenLauncher.Core.Projects.DataModel
     /// <summary>
     /// A dataholder containing all the launchables for one project
     /// </summary>
-    public class ProjectConfigJSON
+    public class ProjectConfigJson
     {
-        private List<LaunchableJSON> _launchables;
-        public List<LaunchableJSON> Launchables
+        private List<LaunchableJson> _launchables;
+        public List<LaunchableJson> Launchables
         {
             get
             {
@@ -27,9 +27,9 @@ namespace OpenLauncher.Core.Projects.DataModel
         /// <summary>
         /// This function will create an empty instance of tis object
         /// </summary>
-        public ProjectConfigJSON()
+        public ProjectConfigJson()
         {
-            _launchables = new List<LaunchableJSON>();
+            _launchables = new List<LaunchableJson>();
         }
     }
 }

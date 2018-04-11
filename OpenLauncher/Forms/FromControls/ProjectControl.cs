@@ -31,7 +31,7 @@ namespace OpenLauncher.Forms.FromControls
     /// </summary>
     public partial class ProjectControl : UserControl
     {
-        private ProjectDataJSON _data;
+        private ProjectDataJson _data;
 
         private SettingsManager _settingsManager;
         private SettingsJSON _settings;
@@ -40,7 +40,7 @@ namespace OpenLauncher.Forms.FromControls
 
         private string _currentExecutable;
 
-        public ProjectControl(ProjectDataJSON data)
+        public ProjectControl(ProjectDataJson data)
         {
             InitializeComponent();
             _data = data;
@@ -58,10 +58,10 @@ namespace OpenLauncher.Forms.FromControls
 
 
             init();
-            if (_data.WebURL != null)
+            if (_data.WebUrl != null)
             {
                 //NOTE find a way to speed up the page loading. Maybe if the web browser is async
-                WB_ProjectMainPage.Url = _data.WebURL;
+                WB_ProjectMainPage.Url = _data.WebUrl;
             }
             else
             {
@@ -82,7 +82,7 @@ namespace OpenLauncher.Forms.FromControls
         private void init()
         {
             ProjectConfigManager projectConfigManager = new ProjectConfigManager(_data);
-            List<LaunchableJSON> launchables = projectConfigManager.GetLaunchables();
+            List<LaunchableJson> launchables = projectConfigManager.GetLaunchables();
 
             B_OpenSite.Enabled = true;
             B_MainAction.Enabled = true;
@@ -122,7 +122,7 @@ namespace OpenLauncher.Forms.FromControls
                 LV_Launchables.Enabled = false;
             }
 
-            foreach (LaunchableJSON launchable in launchables)
+            foreach (LaunchableJson launchable in launchables)
             {
                 ListViewItem item = new ListViewItem(launchable.DisplayName);
                 item.Tag = launchable.Executable;
@@ -239,7 +239,7 @@ namespace OpenLauncher.Forms.FromControls
         /// <param name="e"></param>
         private void B_OpenSite_Click(object sender, EventArgs e)
         {
-            Process.Start(_data.HomeURL);
+            Process.Start(_data.HomeUrl);
         }
 
         /// <summary>

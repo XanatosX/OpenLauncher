@@ -83,7 +83,7 @@ namespace OpenLauncher.Forms
 
             }
 
-            ProjectConfigJSON dataJSON = null;
+            ProjectConfigJson dataJSON = null;
             if (projectConfig != null)
             {
                 dataJSON = projectConfig.ProjectConfigJSON;

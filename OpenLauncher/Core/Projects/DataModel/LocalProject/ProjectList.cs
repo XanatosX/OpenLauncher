@@ -11,42 +11,42 @@ namespace OpenLauncher.Core.Projects.DataModel
     /// </summary>
     public class ProjectList
     {
-        private List<ProjectDataJSON> _dataJSON;
-        public List<ProjectDataJSON> DataJson => _dataJSON;
+        private List<ProjectDataJson> _dataJson;
+        public List<ProjectDataJson> DataJson => _dataJson;
 
         /// <summary>
         /// Construct an empty instance of the class
         /// </summary>
         public ProjectList()
         {
-            _dataJSON = new List<ProjectDataJSON>();
+            _dataJson = new List<ProjectDataJson>();
         }
 
         /// <summary>
         /// This will create a instance with a ProjectListJSON as database
         /// </summary>
         /// <param name="json"></param>
-        public ProjectList(ProjectListJSON json)
+        public ProjectList(ProjectListJson json)
         {
-            _dataJSON = json.DataJson;
+            _dataJson = json.DataJson;
         }
 
         /// <summary>
         /// This will add a new ProjectDataJSON to the class storage
         /// </summary>
         /// <param name="dataJSON">The dataJSON to add to the data storage</param>
-        public void Add(ProjectDataJSON dataJSON)
+        public void Add(ProjectDataJson dataJSON)
         {
-            _dataJSON.Add(dataJSON);
+            _dataJson.Add(dataJSON);
         }
 
         public void Remove(string GUID)
         {
-            for (int i = 0; i < _dataJSON.Count; i++)
+            for (int i = 0; i < _dataJson.Count; i++)
             {
-                if (_dataJSON[i].GUID == GUID)
+                if (_dataJson[i].Guid == GUID)
                 {
-                    _dataJSON.RemoveAt(i);
+                    _dataJson.RemoveAt(i);
                     return;
                 }
             }
@@ -56,11 +56,11 @@ namespace OpenLauncher.Core.Projects.DataModel
         /// This will create a saveable JSON class out of this class
         /// </summary>
         /// <returns>A saveable JSON class object</returns>
-        public ProjectListJSON getSaveable()
+        public ProjectListJson GetSaveable()
         {
-            return new ProjectListJSON()
+            return new ProjectListJson
             {
-                DataJson = _dataJSON,
+                DataJson = _dataJson,
             };
         }
     }

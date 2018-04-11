@@ -86,7 +86,7 @@ namespace OpenLauncher.Core.Updater
         /// This will finaly copy all the data you need for the server
         /// </summary>
         /// <param name="projectConfig">This is the project configuration file containing all the launchables.</param>
-        public void SaveServerData(ProjectConfigJSON projectConfig = null)
+        public void SaveServerData(ProjectConfigJson projectConfig = null)
         {
             CopyFiles();
 
@@ -102,7 +102,7 @@ namespace OpenLauncher.Core.Updater
         /// This will save the project config file and add it to the update info file
         /// </summary>
         /// <param name="projectConfig"></param>
-        private void saveProjectConfig(ProjectConfigJSON projectConfig)
+        private void saveProjectConfig(ProjectConfigJson projectConfig)
         {
             string dataToSave = JsonConvert.SerializeObject(projectConfig);
             string fileName = _outputFolder + "\\" + "ProjectConfig.json";

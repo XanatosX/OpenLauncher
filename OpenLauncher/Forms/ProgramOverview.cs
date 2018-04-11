@@ -120,7 +120,7 @@ namespace OpenLauncher.Forms
 
             for (int i = 0; i < manager.Projects.Count; i++)
             {
-                ProjectDataJSON currentProject = manager.Projects[i];
+                ProjectDataJson currentProject = manager.Projects[i];
                 if (currentProject.DisplayImage != null)
                 {
                     IL_ProjectImages.Images.Add(currentProject.DisplayImage);
@@ -145,10 +145,10 @@ namespace OpenLauncher.Forms
             {
                 ListView listView = (ListView)sender;
                 ListViewItem item = listView.SelectedItems[0];
-                if (item.Tag.GetType() == typeof(ProjectDataJSON))
+                if (item.Tag.GetType() == typeof(ProjectDataJson))
                 {
                     P_ProjectPanel.Controls.Clear();
-                    ProjectDataJSON projectData = (ProjectDataJSON)item.Tag;
+                    ProjectDataJson projectData = (ProjectDataJson)item.Tag;
 
                     ProjectControl projectController = new ProjectControl(projectData);
                     P_ProjectPanel.Controls.Add(projectController);
@@ -201,10 +201,10 @@ namespace OpenLauncher.Forms
             if (LV_Projects.SelectedItems.Count > 0)
             {
                 ListViewItem item = LV_Projects.SelectedItems[0];
-                if (item.Tag.GetType() == typeof(ProjectDataJSON))
+                if (item.Tag.GetType() == typeof(ProjectDataJson))
                 {
-                    ProjectDataJSON data = (ProjectDataJSON)item.Tag;
-                    manager.Remove(data.GUID);
+                    ProjectDataJson data = (ProjectDataJson)item.Tag;
+                    manager.Remove(data.Guid);
                     manager.Save();
                     P_ProjectPanel.Controls.Clear();
                 }

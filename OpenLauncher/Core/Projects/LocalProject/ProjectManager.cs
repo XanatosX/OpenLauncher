@@ -19,7 +19,7 @@ namespace OpenLauncher.Core.Projects
         private string _projectFile;
 
         private ProjectList _projects;
-        public List<ProjectDataJSON> Projects => _projects.DataJson;
+        public List<ProjectDataJson> Projects => _projects.DataJson;
 
         /// <summary>
         /// Create an empty instance of the project
@@ -57,7 +57,7 @@ namespace OpenLauncher.Core.Projects
             
             try
             {
-                ProjectDataJSON loadetObject = JsonConvert.DeserializeObject<ProjectDataJSON>(fileData);
+                ProjectDataJson loadetObject = JsonConvert.DeserializeObject<ProjectDataJson>(fileData);
                 Add(loadetObject);
             }
             catch (Exception)
@@ -71,10 +71,10 @@ namespace OpenLauncher.Core.Projects
         /// You need to save the manager after adding an entry!
         /// </summary>
         /// <param name="newData">The new dataset to add</param>
-        public void Add(ProjectDataJSON newData)
+        public void Add(ProjectDataJson newData)
         {
             string GUID = Guid.NewGuid().ToString();
-            newData.GUID = GUID;
+            newData.Guid = GUID;
 
             _projects.Add(newData);
         }
@@ -104,7 +104,7 @@ namespace OpenLauncher.Core.Projects
             {
                 fileData = reader.ReadToEnd();
             }
-            ProjectListJSON loadetObject = JsonConvert.DeserializeObject<ProjectListJSON>(fileData);
+            ProjectListJson loadetObject = JsonConvert.DeserializeObject<ProjectListJson>(fileData);
 
             try
             {
@@ -114,7 +114,7 @@ namespace OpenLauncher.Core.Projects
             {
                 return false;
             }
-            foreach (ProjectDataJSON currentJSON in _projects.DataJson)
+            foreach (ProjectDataJson currentJSON in _projects.DataJson)
             {
                 currentJSON.CreateEnrichedContent();
             }

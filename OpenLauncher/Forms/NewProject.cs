@@ -42,7 +42,7 @@ namespace OpenLauncher.Forms
         private void B_Save_Click(object sender, EventArgs e)
         {
             _addProject = CB_AddProject.Checked;
-            ProjectDataJson jsonData = new ProjectDataJson()
+            ProjectDataJson jsonData = new ProjectDataJson
             {
                 Name = TB_ProjectName.Text,
                 ImageUrl = TB_ImageURL.Text,

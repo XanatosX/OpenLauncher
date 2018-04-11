@@ -92,7 +92,7 @@ namespace OpenLauncher.Forms
         {
             if (e.Button == MouseButtons.Right)
             {
-                if (LV_Executables.FocusedItem.Bounds.Contains(e.Location) == true)
+                if (LV_Executables.FocusedItem.Bounds.Contains(e.Location))
                 {
                     CMS_ItemSelect.Show(Cursor.Position);
                 }

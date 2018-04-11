@@ -31,12 +31,11 @@ namespace OpenLauncher.Forms.FromControls
     /// </summary>
     public partial class ProjectControl : UserControl
     {
-        private ProjectDataJson _data;
+        readonly ProjectDataJson _data;
+        
+        readonly SettingsJson _settings;
 
-        private SettingsManager _settingsManager;
-        private SettingsJson _settings;
-
-        private string _projectFolder;
+        readonly string _projectFolder;
 
         private string _currentExecutable;
 
@@ -44,9 +43,9 @@ namespace OpenLauncher.Forms.FromControls
         {
             InitializeComponent();
             _data = data;
-            _settingsManager = new SettingsManager();
-            _settingsManager.Load();
-            _settings = _settingsManager.Settings;
+            SettingsManager settingsManager = new SettingsManager();
+            settingsManager.Load();
+            _settings = settingsManager.Settings;
 
             _projectFolder = _settings.MainProjectFolder + "\\" + _data.Name;
 
@@ -158,15 +157,11 @@ namespace OpenLauncher.Forms.FromControls
             switch (currentMode)
             {
                 case ActionButtonMode.Download:
-                    DownloadProject();
-                    break;
                 case ActionButtonMode.Update:
                     DownloadProject();
                     break;
                 case ActionButtonMode.Launch:
                     LaunchProject();
-                    break;
-                default:
                     break;
             }
         }

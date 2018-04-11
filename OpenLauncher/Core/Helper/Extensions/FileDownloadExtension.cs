@@ -14,9 +14,10 @@ namespace OpenLauncher.Core.Helper
     public static class FileDownloadExtension
     {
         /// <summary>
-        /// This will download the file as String
+        /// Extension method do download a file as string
         /// </summary>
-        /// <returns>The file content as string</returns>
+        /// <param name="fileToDownload">The URL to the file to download</param>
+        /// <returns></returns>
         public static string DownloadString(this string fileToDownload)
         {
             Uri testUri = null;
@@ -46,9 +47,10 @@ namespace OpenLauncher.Core.Helper
         }
 
         /// <summary>
-        /// This will download the file as a bianry 
+        /// A extension method to download the file as binary array
         /// </summary>
-        /// <returns>Returns the content as a binary array</returns>
+        /// <param name="fileToDownload">The url to the file to download</param>
+        /// <returns></returns>
         public static byte[] DownloadBinary(this string fileToDownload)
         {
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(fileToDownload);

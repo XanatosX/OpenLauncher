@@ -12,16 +12,16 @@ namespace OpenLauncher.Core.GlobalEvents
     /// </summary>
     public class ErrorEvent : EventArgs
     {
-        private ErrorEnum _errorLevel;
+        readonly ErrorEnum _errorLevel;
         public ErrorEnum ErrorLevel => _errorLevel;
 
-        private string _errorMessage;
+        readonly string _errorMessage;
         public string ErrorMessage;
 
-        private string _shortMessage;
-        public string ShortErrorMessage;
+        readonly string _shortMessage;
+        public string ShortErrorMessage => _shortMessage;
 
-        private DateTime _errorTriggerTime;
+        readonly DateTime _errorTriggerTime;
         public DateTime ErrorTriggerTime => _errorTriggerTime;
 
         /// <summary>
@@ -30,12 +30,20 @@ namespace OpenLauncher.Core.GlobalEvents
         /// <param name="errorlevel">The level of the error</param>
         /// <param name="errorMessage">The error message</param>
         /// <param name="shortMessage">A shorter version of the error</param>
-        public ErrorEvent(ErrorEnum errorlevel, string errorMessage, string shortMessage = "")
+        public ErrorEvent(ErrorEnum errorlevel, string errorMessage, string shortMessage)
         {
             _errorLevel = errorlevel;
             _errorMessage = errorMessage;
             _shortMessage = shortMessage;
 
+            _errorTriggerTime = DateTime.Now;
+        }
+
+        public ErrorEvent(ErrorEnum errorLevel, string errorMessage)
+        {
+            _errorLevel = errorLevel;
+            _errorMessage = errorMessage;
+            _shortMessage = "";
             _errorTriggerTime = DateTime.Now;
         }
     }

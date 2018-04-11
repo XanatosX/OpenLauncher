@@ -114,8 +114,7 @@ namespace OpenLauncher.Core.Projects
         /// </summary>
         private void getOpenLauncherInfo()
         {
-            FileDownloader downloader = new FileDownloader(_openLauncherInfo);
-            string openLauncherInfo = downloader.DownloadString();
+            string openLauncherInfo = _openLauncherInfo.DownloadString();
             try
             {
                 _launcherSettings = JsonConvert.DeserializeObject<OpenLauncherSettingJSON>(openLauncherInfo);
@@ -132,8 +131,7 @@ namespace OpenLauncher.Core.Projects
         /// <returns>Returns true if file is parsable and available</returns>
         private bool checkProjectConfig()
         {
-            FileDownloader downloader = new FileDownloader(_serverProjectConfig);
-            string projectConfig = downloader.DownloadString();
+            string projectConfig = _serverProjectConfig.DownloadString();
 
             try
             {
@@ -179,8 +177,7 @@ namespace OpenLauncher.Core.Projects
         /// <returns>Returns true if the file is available and parsable</returns>
         private bool checkUpdateInfo()
         {
-            FileDownloader downloader = new FileDownloader(_updateInfo);
-            string projectConfig = downloader.DownloadString();
+            string projectConfig = _updateInfo.DownloadString();
 
             return true;
         }

@@ -158,9 +158,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LanguageFiles\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Templates\Websites\ProjectBasic.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

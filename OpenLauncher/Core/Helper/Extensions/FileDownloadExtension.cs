@@ -11,34 +11,23 @@ namespace OpenLauncher.Core.Helper
     /// <summary>
     /// This is a helper class to download a file from an URL as String or as Byte array
     /// </summary>
-    public class FileDownloader
+    public static class FileDownloadExtension
     {
-        private string _fileToDownload;
-
-        /// <summary>
-        /// This function will create a new FileDownloader instance
-        /// </summary>
-        /// <param name="fileToDownload"></param>
-        public FileDownloader(string fileToDownload)
-        {
-            _fileToDownload = fileToDownload;
-        }
-
         /// <summary>
         /// This will download the file as String
         /// </summary>
         /// <returns>The file content as string</returns>
-        public string DownloadString()
+        public static string DownloadString(this string fileToDownload)
         {
             Uri testUri = null;
-            Uri.TryCreate(_fileToDownload, UriKind.Absolute, out testUri);
+            Uri.TryCreate(fileToDownload, UriKind.Absolute, out testUri);
 
             if (testUri == null)
             {
                 return "";
             }
 
-            WebRequest request = WebRequest.Create(_fileToDownload);
+            WebRequest request = WebRequest.Create(fileToDownload);
             WebResponse response = null;
             try
             {
@@ -60,9 +49,9 @@ namespace OpenLauncher.Core.Helper
         /// This will download the file as a bianry 
         /// </summary>
         /// <returns>Returns the content as a binary array</returns>
-        public byte[] DownloadBinary()
+        public static byte[] DownloadBinary(this string fileToDownload)
         {
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(_fileToDownload);
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(fileToDownload);
             webRequest.Method = "GET";
             webRequest.Timeout = 3000;
              

@@ -226,8 +226,7 @@ namespace OpenLauncher.Core.Updater
         /// <returns>Returns the server instance of the update list</returns>
         private UpdaterConfigJSON getUpdaterConfigJSON()
         {
-            FileDownloader downloader = new FileDownloader(_projectManager.UpdateInfo);
-            string updateInfo = downloader.DownloadString();
+            string updateInfo = _projectManager.UpdateInfo.DownloadString();
 
             UpdaterConfigJSON updaterConfig = null;
 
@@ -249,8 +248,7 @@ namespace OpenLauncher.Core.Updater
         /// <param name="fileName">The filenam on the server</param>
         private void DownloadFile(string URLPath, string fileName)
         {
-            FileDownloader downloader = new FileDownloader(URLPath);
-            byte[] data = downloader.DownloadBinary();
+            byte[] data = URLPath.DownloadBinary();
 
             string file = _settings.MainProjectFolder + "\\" + _data.Name + "\\" + fileName;
 

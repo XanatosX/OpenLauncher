@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="Core\GlobalEnums\ErrorEnum.cs" />
     <Compile Include="Core\GlobalEvents\ErrorEvent.cs" />
-    <Compile Include="Core\Helper\ChecksumCalculator.cs" />
+    <Compile Include="Core\Helper\Extensions\ChecksumCalculator.cs" />
     <Compile Include="Core\Projects\DataModel\ProjectConfig\LaunchableJSON.cs" />
     <Compile Include="Core\Projects\DataModel\ProjectConfig\OpenLauncherSettingJSON.cs" />
     <Compile Include="Core\Projects\DataModel\ProjectConfig\ProjectConfigJSON.cs" />

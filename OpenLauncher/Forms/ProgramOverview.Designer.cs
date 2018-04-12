@@ -44,6 +44,8 @@
             this.P_ProjectPanel = new System.Windows.Forms.Panel();
             this.CMS_projectManagment = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MS_MainStrip.SuspendLayout();
             this.CMS_projectManagment.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +54,8 @@
             // 
             this.MS_MainStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fORMFILEToolStripMenuItem,
-            this.projectToolStripMenuItem});
+            this.projectToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.MS_MainStrip.Location = new System.Drawing.Point(0, 0);
             this.MS_MainStrip.Name = "MS_MainStrip";
             this.MS_MainStrip.Size = new System.Drawing.Size(800, 24);
@@ -159,6 +162,21 @@
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.creditsToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // creditsToolStripMenuItem
+            // 
+            this.creditsToolStripMenuItem.Name = "creditsToolStripMenuItem";
+            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.creditsToolStripMenuItem.Text = "About";
+            this.creditsToolStripMenuItem.Click += new System.EventHandler(this.creditsToolStripMenuItem_Click);
+            // 
             // ProgramOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -197,5 +215,7 @@
         private System.Windows.Forms.ToolStripMenuItem createServerDownloadablesToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip CMS_projectManagment;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem creditsToolStripMenuItem;
     }
 }

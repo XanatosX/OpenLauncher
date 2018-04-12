@@ -51,6 +51,7 @@
     <Compile Include="Core\GlobalEnums\ErrorEnum.cs" />
     <Compile Include="Core\GlobalEvents\ErrorEvent.cs" />
     <Compile Include="Core\Helper\Extensions\ChecksumCalculator.cs" />
+    <Compile Include="Core\Helper\Extensions\FileLoaderExtension.cs" />
     <Compile Include="Core\Projects\DataModel\ProjectConfig\LaunchableJson.cs" />
     <Compile Include="Core\Projects\DataModel\ProjectConfig\OpenLauncherSettingJson.cs" />
     <Compile Include="Core\Projects\DataModel\ProjectConfig\ProjectConfigJson.cs" />
@@ -80,6 +81,12 @@
     </Compile>
     <Compile Include="Forms\CreateServerDownloadable.Designer.cs">
       <DependentUpon>CreateServerDownloadable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FromControls\ProjectControl.cs">
       <SubType>UserControl</SubType>
@@ -118,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CreateServerDownloadable.resx">
       <DependentUpon>CreateServerDownloadable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FromControls\ProjectControl.resx">
       <DependentUpon>ProjectControl.cs</DependentUpon>
@@ -159,6 +169,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Templates\Websites\About.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Websites\css\creditsStyle.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\Websites\ProjectBasic.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

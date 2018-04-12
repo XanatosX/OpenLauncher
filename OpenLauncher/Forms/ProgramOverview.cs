@@ -220,5 +220,13 @@ namespace OpenLauncher.Forms
                 LV_Projects.SelectedItems[0].Remove();
             }
         }
+
+        private void creditsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About credits = new About();
+            credits.StartPosition = FormStartPosition.CenterParent;
+
+            credits.ShowDialog();
+        }
     }
 }

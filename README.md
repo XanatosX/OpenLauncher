@@ -1,4 +1,7 @@
 # Open launcher
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/683563c94cee40f9bab88d09cacb1653)](https://app.codacy.com/app/simonaberle/OpenLauncher?utm_source=github.com&utm_medium=referral&utm_content=XanatosX/OpenLauncher&utm_campaign=badger)
+
 This project is trying to provide a open source program launcher for windows
 
 The key features are as followed:

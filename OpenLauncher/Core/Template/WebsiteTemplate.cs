@@ -84,13 +84,12 @@ namespace OpenLauncher.Core.Template
         /// <returns>Returns the template with the changed values</returns>
         private string Replace(string baseTemplate)
         {
-            string returnValue = String.Empty;
             foreach (KeyValuePair<string, string> dataPair in _replaceDict)
             {
-                returnValue = baseTemplate.Replace("%" + dataPair.Key + "%", dataPair.Value);
+                baseTemplate = baseTemplate.Replace("%" + dataPair.Key + "%", dataPair.Value);
             }
 
-            return returnValue;
+            return baseTemplate;
         }
     }
 }
